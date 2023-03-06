@@ -2,7 +2,10 @@
 
 
 /** @var yii\web\View $this */
-/** @var app\models\Rate $model */
+/** @var app\models\DateForm $model */
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Обороты';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,11 +23,24 @@ $client = @$_GET['client'] == 'solid' ? 'solid' : 'mts';
                                 <a class="nav-item nav-link <?= $client == 'solid' ? 'active' : null ?>" id="nav-<?= $client ?>-tab" href="/report/index?client=solid" role="tab" aria-controls="nav-<?= $client ?>" aria-selected="<?= ($client == 'mts') ?>">Солидарность</a>
                             </div>
                         </nav>
+
+                        <div class="my-3">
+
+                        <?php $form = ActiveForm::begin();
+                        ?>
+
+                        <?= $form->field($model, 'date')->input('date') ?>
+
+                        <?= Html::submitButton('Search', ['class' => 'btn btn-success']) ?>
+                        <?php ActiveForm::end(); ?>
+
+                        </div>
+
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-<?= $client ?>" role="tabpanel" aria-labelledby="nav-<?= $client ?>-tab">
                                 <table class="table table-striped">
                                     <thead>
-                                    <tr>1
+                                    <tr>
                                         <th>#</th>
                                         <th>Date</th>
                                         <th>Count</th>
