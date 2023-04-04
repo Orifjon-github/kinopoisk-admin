@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=192.168.8.230;dbname=imt',
+    'dsn' => 'mysql:host=10.8.8.164;dbname=imt',
     'username' => 'imt_user',
     'password' => 'P@ssword_01',
     'charset' => 'utf8',
