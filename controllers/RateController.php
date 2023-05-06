@@ -24,7 +24,7 @@ class RateController extends Controller
             'cb_rate' => $cb_rate,
             'max' => $cb_rate * 1.1
         ];
-        $client = $client == 'solid' ? 'solid' : 'mts';
+        $client = in_array($client, ['solid', 'sber']) ? $client : 'mts';
         $rates = Rate::find()->where(['client' => $client])->orderBy(['id' => SORT_DESC])->limit(5)->all();
         $model = new Rate();
         if ($this->request->isPost) {

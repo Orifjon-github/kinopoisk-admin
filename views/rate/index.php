@@ -1,13 +1,12 @@
 <?php
 
-use yii\helpers\Html;
-
 /** @var yii\web\View $this */
 /** @var app\models\Rate $model */
+/** @var array $line_rate */
 
 $this->title = 'Курсы валют';
 $this->params['breadcrumbs'][] = $this->title;
-$client = @$_GET['client'] == 'solid' ? 'solid' : 'mts';
+$client = in_array(@$_GET['client'], ['solid', 'sber']) ? @$_GET['client'] : 'mts';
 $model->amount = $line_rate['cb_rate'];
 ?>
 <div class="rate">
@@ -19,7 +18,8 @@ $model->amount = $line_rate['cb_rate'];
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link <?= $client == 'mts' ? 'active' : null ?>" id="nav-<?= $client ?>-tab" href="/rate/index?client=mts" role="tab" aria-controls="nav-<?= $client ?>" aria-selected="<?= ($client == 'mts') ?>">МТС</a>
-                                <a class="nav-item nav-link <?= $client == 'solid' ? 'active' : null ?>" id="nav-<?= $client ?>-tab" href="/rate/index?client=solid" role="tab" aria-controls="nav-<?= $client ?>" aria-selected="<?= ($client == 'mts') ?>">Солидарность</a>
+                                <a class="nav-item nav-link <?= $client == 'solid' ? 'active' : null ?>" id="nav-<?= $client ?>-tab" href="/rate/index?client=solid" role="tab" aria-controls="nav-<?= $client ?>" aria-selected="<?= ($client == 'solid') ?>">Солидарность</a>
+                                <a class="nav-item nav-link <?= $client == 'sber' ? 'active' : null ?>" id="nav-<?= $client ?>-tab" href="/rate/index?client=sber" role="tab" aria-controls="nav-<?= $client ?>" aria-selected="<?= ($client == 'sber') ?>">Сбер</a>
                             </div>
                         </nav>
                         <h5 class="mt-5">Нынешний курс для RUBUZS: <b><?= $rates[0]->amount ?? 0 ?></b></h5>
