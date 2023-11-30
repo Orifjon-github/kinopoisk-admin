@@ -31,8 +31,6 @@ $this->registerJs($this->render('_script.js'));
 $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>';
 ?>
 <div class="assignment-index">
-    <h1><?=$this->title;?></h1>
-
     <div class="row">
         <div class="col-sm-5">
             <input class="form-control search" data-target="available"

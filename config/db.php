@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=10.8.8.164;dbname=imt_admin',
-    'username' => 'imt_user',
-    'password' => 'P@ssword_01',
+    'dsn' => 'mysql:host=127.0.0.1;dbname=imt_admin',
+    'username' => 'root',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models\search;
+namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Rate;
+use app\models\Socials;
 
 /**
- * RateSearch represents the model behind the search form of `app\models\Rate`.
+ * SocialsSearch represents the model behind the search form of `app\models\Socials`.
  */
-class RateSearch extends Rate
+class SocialsSearch extends Socials
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,8 @@ class RateSearch extends Rate
     public function rules()
     {
         return [
-            [['id', 'currency'], 'integer'],
-            [['client', 'from', 'to', 'created_at', 'updated_at'], 'safe'],
-            [['amount'], 'number'],
+            [['id'], 'integer'],
+            [['name', 'link', 'icon', 'enable', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class RateSearch extends Rate
      */
     public function search($params)
     {
-        $query = Rate::find();
+        $query = Socials::find();
 
         // add conditions that should always apply here
 
@@ -60,15 +59,14 @@ class RateSearch extends Rate
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'currency' => $this->currency,
-            'amount' => $this->amount,
-            'from' => $this->from,
-            'to' => $this->to,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'client', $this->client]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'link', $this->link])
+            ->andFilterWhere(['like', 'icon', $this->icon])
+            ->andFilterWhere(['like', 'enable', $this->enable]);
 
         return $dataProvider;
     }
