@@ -12,17 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'key')->textInput(['maxLength' => true]) ?>
 
-    <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'value')->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'value_uz')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'value_uz')->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'enable')->dropDownList([ 1 => '1', '' => '', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'enable')->dropDownList(\app\models\Socials::enableDisableTypes(), ['options' => [1 => ['selected' => true]]]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
