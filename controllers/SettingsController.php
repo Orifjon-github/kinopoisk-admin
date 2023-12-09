@@ -103,7 +103,7 @@ class SettingsController extends Controller
                 $newValue = UploadedFile::getInstance($model, 'value');
                 $newValueUz = UploadedFile::getInstance($model, 'value_uz');
                 if ($newValue) {
-                    $uploadPath = 'uploads/test/';
+                    $uploadPath = 'uploads/';
                     $fileName = uniqid() . '.' . $newValue->extension;
                     $filePath = $uploadPath . $fileName;
 
@@ -114,7 +114,7 @@ class SettingsController extends Controller
                     $model->value = $oldValue;
                 }
                 if ($newValueUz) {
-                    $uploadPath = 'uploads/test/';
+                    $uploadPath = 'uploads/';
                     $fileName = uniqid() . '.' . $newValueUz->extension;
                     $filePath = $uploadPath . $fileName;
 
