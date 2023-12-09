@@ -34,3 +34,10 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+#databases
+/config/db.php
+/config/db2.php
+/config/params.php
+
+/web/uploads

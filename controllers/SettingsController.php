@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use app\models\Settings;
 use app\models\SettingsSearch;
+use yii\helpers\Url;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SettingsController implements the CRUD actions for Settings model.
@@ -65,22 +68,22 @@ class SettingsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new Settings();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+//    public function actionCreate()
+//    {
+//        $model = new Settings();
+//
+//        if ($this->request->isPost) {
+//            if ($model->load($this->request->post()) && $model->save()) {
+//                return $this->redirect(['view', 'id' => $model->id]);
+//            }
+//        } else {
+//            $model->loadDefaultValues();
+//        }
+//
+//        return $this->render('create', [
+//            'model' => $model,
+//        ]);
+//    }
 
     /**
      * Updates an existing Settings model.
@@ -91,15 +94,44 @@ class SettingsController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = Settings::findOne($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ?? $model->validate()) {
+            if (in_array($model->key, ['logo', 'test'])) {
+                $oldValue = $model->value;
+                $oldValueUz = $model->value_uz;
+                $newValue = UploadedFile::getInstance($model, 'value');
+                $newValueUz = UploadedFile::getInstance($model, 'value_uz');
+                if ($newValue) {
+                    $uploadPath = Url::base(true) . '/uploads/logo/';
+                    $fileName = uniqid() . '.' . $newValue->extension;
+                    $filePath = $uploadPath . $fileName;
+
+                    if ($newValue->saveAs($filePath)) {
+                        $model->value = $filePath;
+                    }
+                } else {
+                    $model->value = $oldValue;
+                }
+                if ($newValueUz) {
+                    $uploadPath = Url::base(true) . '/uploads/logo/'; // Define your upload directory
+                    $fileName = uniqid() . '.' . $newValueUz->extension;
+                    $filePath = $uploadPath . $fileName;
+
+                    if ($newValueUz->saveAs($filePath)) {
+                        $model->value_uz = $filePath;
+                    }
+                } else {
+                    $model->value_uz = $oldValueUz;
+                }
+
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
