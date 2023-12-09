@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Settings;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,8 +16,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'key')->textInput(['maxLength' => true, 'readonly' => true]) ?>
 
     <?php
-    if (in_array($model->key, ['logo', 'test'])) {
-        $key = \app\models\Settings::settingKeys($model->key) ?? $model->key;
+    if (in_array($model->key, Settings::fileKeys())) {
+        $key = Settings::settingKeys($model->key) ?? $model->key;
         echo "<h5><strong>$key</strong></h5>";
         echo $form->field($model, 'value')->label(false)->fileInput();
 

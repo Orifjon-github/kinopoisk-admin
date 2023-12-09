@@ -71,4 +71,20 @@ class Settings extends \yii\db\ActiveRecord
 
         return $list[$key] ?? null;
     }
+    public static function fileKeys(): array
+    {
+        return [
+            'logo',
+            'background_image_partner',
+            'about_image',
+            'result_video',
+            'consultation_image',
+            'productBg',
+            'contactBg',
+            'aboutBg',
+            'blogBg',
+            'cartBg',
+            'favoritesBg'
+        ];
+    }
 }
