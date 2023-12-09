@@ -61,4 +61,14 @@ class Settings extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public static function settingKeys($key): ?string
+    {
+        $list = [
+            'logo' => 'Логотип',
+            'email' => 'Электронная почта'
+        ];
+
+        return $list[$key] ?? null;
+    }
 }
