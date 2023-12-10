@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Homes;
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -29,12 +30,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title:ntext',
-            'title_uz:ntext',
+//            'title_uz:ntext',
             'description:ntext',
-            'description_uz:ntext',
-            //'image:ntext',
+//            'description_uz:ntext',
+            [
+                'attribute' => 'image',
+                'format' => 'raw',
+                'value' => function (Homes $model) {
+                    return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                }
+            ],
             //'image_uz:ntext',
-            //'enable',
+            [
+                'attribute' => 'enable',
+                'value' => function (Homes $model) {
+                    return Socials::enableOrDisable($model->enable);
+                },
+                'filter' => Socials::enableDisableTypes()
+            ],
             //'created_at',
             //'updated_at',
             [
