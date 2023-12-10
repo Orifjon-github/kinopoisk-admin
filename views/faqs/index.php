@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Faqs;
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -15,10 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="faqs-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Faqs', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create new', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,10 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'question:ntext',
-            'question_uz:ntext',
+//            'question_uz:ntext',
             'answer:ntext',
-            'answer_uz:ntext',
-            //'enable',
+//            'answer_uz:ntext',
+            [
+                'attribute' => 'enable',
+                'value' => function (Faqs $model) {
+                    return Socials::enableOrDisable($model->enable);
+                },
+                'filter' => Socials::enableDisableTypes()
+            ],
             //'created_at',
             //'updated_at',
             [

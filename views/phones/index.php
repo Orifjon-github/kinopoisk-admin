@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Phones;
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -15,10 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="phones-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
+<!---->
     <p>
-        <?= Html::a('Create Phones', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create new', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -32,8 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'place',
             'number',
-            'enable',
-            'created_at',
+            [
+                'attribute' => 'enable',
+                'value' => function (Phones $model) {
+                    return Socials::enableOrDisable($model->enable);
+                },
+                'filter' => Socials::enableDisableTypes()
+            ],
             //'updated_at',
             [
                 'class' => ActionColumn::className(),
