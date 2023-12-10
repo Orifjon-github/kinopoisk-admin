@@ -12,23 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'title')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'title_uz')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'title_uz')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'description_uz')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description_uz')->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'image')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
-    <?= $form->field($model, 'image_uz')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'image_uz')->fileInput() ?>
 
-    <?= $form->field($model, 'enable')->dropDownList([ 1 => '1', '' => '', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'enable')->dropDownList(\app\models\Socials::enableDisableTypes(), ['options' => [1 => ['selected' => true]]]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

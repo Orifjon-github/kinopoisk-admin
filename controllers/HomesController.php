@@ -7,6 +7,7 @@ use app\models\HomesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * HomesController implements the CRUD actions for Homes model.
@@ -70,8 +71,27 @@ class HomesController extends Controller
         $model = new Homes();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $newValue = UploadedFile::getInstance($model, 'image');
+                $newValueUz = UploadedFile::getInstance($model, 'image_uz');
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+                if ($newValue->saveAs($filePath)) {
+                    $model->image = $filePath;
+                }
+                if ($newValueUz) {
+                    $uploadPath = 'uploads/';
+                    $fileName = uniqid() . '.' . $newValueUz->extension;
+                    $filePath = $uploadPath . $fileName;
+
+                    if ($newValueUz->saveAs($filePath)) {
+                        $model->image_uz = $filePath;
+                    }
+                }
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -93,8 +113,36 @@ class HomesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $oldValue = $model->image;
+            $oldValueUz = $model->image_uz;
+            $newValue = UploadedFile::getInstance($model, 'image');
+            $newValueUz = UploadedFile::getInstance($model, 'image_uz');
+            if ($newValue) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValue->saveAs($filePath)) {
+                    $model->image = $filePath;
+                }
+            } else {
+                $model->image = $oldValue;
+            }
+            if ($newValueUz) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValueUz->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValueUz->saveAs($filePath)) {
+                    $model->image_uz = $filePath;
+                }
+            } else {
+                $model->image_uz = $oldValueUz;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
