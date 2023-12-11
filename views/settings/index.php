@@ -16,10 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="settings-index">
 
-<!--    <p>-->
-<!--        --><?//= Html::a('Create Settings', ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([

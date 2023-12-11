@@ -97,7 +97,7 @@ class SettingsController extends Controller
         $model = Settings::findOne($id);
 
         if ($model->load(Yii::$app->request->post()) ?? $model->validate()) {
-            if (in_array($model->key, ['logo', 'test'])) {
+            if (in_array($model->key, Settings::fileKeys())) {
                 $oldValue = $model->value;
                 $oldValueUz = $model->value_uz;
                 $newValue = UploadedFile::getInstance($model, 'value');
