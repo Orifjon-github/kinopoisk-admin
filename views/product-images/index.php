@@ -1,6 +1,7 @@
 <?php
 
 use app\models\ProductImages;
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -14,8 +15,6 @@ $this->title = 'Product Images';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-images-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Product Images', ['create'], ['class' => 'btn btn-success']) ?>
@@ -31,9 +30,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'product_id',
-            'image:ntext',
-            'enable',
-            'created_at',
+            [
+                'attribute' => 'image',
+                'format' => 'raw',
+                'value' => function (ProductImages $model) {
+                    return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                }
+            ],
+            [
+                'attribute' => 'enable',
+                'value' => function (ProductImages $model) {
+                    return Socials::enableOrDisable($model->enable);
+                },
+                'filter' => Socials::enableDisableTypes()
+            ],
+//            'created_at',
             //'updated_at',
             [
                 'class' => ActionColumn::className(),
