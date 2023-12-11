@@ -86,7 +86,8 @@ class Settings extends \yii\db\ActiveRecord
             'cartBg',
             'favoritesBg',
             'partnerBg',
-            'about_video'
+            'about_video',
+            'result_image'
         ];
     }
 }
