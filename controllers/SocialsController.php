@@ -7,6 +7,7 @@ use app\models\SocialsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SocialsController implements the CRUD actions for Socials model.
@@ -70,8 +71,17 @@ class SocialsController extends Controller
         $model = new Socials();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $newValue = UploadedFile::getInstance($model, 'icon');
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+                if ($newValue->saveAs($filePath)) {
+                    $model->icon = $filePath;
+                }
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -93,8 +103,23 @@ class SocialsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $oldValue = $model->icon;
+            $newValue = UploadedFile::getInstance($model, 'icon');
+            if ($newValue) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValue->saveAs($filePath)) {
+                    $model->icon = $filePath;
+                }
+            } else {
+                $model->icon = $oldValue;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

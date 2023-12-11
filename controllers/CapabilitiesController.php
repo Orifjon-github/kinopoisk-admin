@@ -7,6 +7,7 @@ use app\models\CapabilitiesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CapabilitiesController implements the CRUD actions for Capabilities model.
@@ -70,8 +71,17 @@ class CapabilitiesController extends Controller
         $model = new Capabilities();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $newValue = UploadedFile::getInstance($model, 'image');
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+                if ($newValue->saveAs($filePath)) {
+                    $model->image = $filePath;
+                }
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -93,8 +103,23 @@ class CapabilitiesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $oldValue = $model->image;
+            $newValue = UploadedFile::getInstance($model, 'image');
+            if ($newValue) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValue->saveAs($filePath)) {
+                    $model->image = $filePath;
+                }
+            } else {
+                $model->image = $oldValue;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
