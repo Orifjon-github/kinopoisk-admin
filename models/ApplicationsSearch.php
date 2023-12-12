@@ -18,7 +18,7 @@ class ApplicationsSearch extends Applications
     {
         return [
             [['id'], 'integer'],
-            [['name', 'phone', 'email', 'description', 'type', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'phone', 'email', 'description', 'address', 'type', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 

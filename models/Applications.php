@@ -13,6 +13,7 @@ use Yii;
  * @property string|null $email
  * @property string $description
  * @property string $type
+ * @property string $address
  * @property string|null $created_at
  * @property string|null $updated_at
  */
@@ -41,7 +42,7 @@ class Applications extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'phone'], 'required'],
-            [['description', 'type'], 'string'],
+            [['description', 'type', 'address'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'phone', 'email'], 'string', 'max' => 255],
         ];
@@ -57,6 +58,7 @@ class Applications extends \yii\db\ActiveRecord
             'name' => 'Name',
             'phone' => 'Phone',
             'email' => 'Email',
+            'address' => 'Address',
             'description' => 'Description',
             'type' => 'Type',
             'created_at' => 'Created At',
