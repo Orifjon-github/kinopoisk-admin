@@ -108,10 +108,9 @@ class PartnersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $oldValue = $model->icon;
+        $oldValueUz = $model->icon_uz;
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $oldValue = $model->icon;
-            $oldValueUz = $model->icon_uz;
             $newValue = UploadedFile::getInstance($model, 'icon');
             $newValueUz = UploadedFile::getInstance($model, 'icon_uz');
             if ($newValue) {

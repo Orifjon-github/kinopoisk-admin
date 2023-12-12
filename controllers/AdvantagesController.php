@@ -102,9 +102,8 @@ class AdvantagesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $oldValue = $model->icon;
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $oldValue = $model->icon;
             $newValue = UploadedFile::getInstance($model, 'icon');
             if ($newValue) {
                 $uploadPath = 'uploads/';

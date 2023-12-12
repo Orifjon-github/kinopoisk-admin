@@ -112,10 +112,9 @@ class CommentsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $oldValue = $model->image;
+        $oldValueUz = $model->video;
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $oldValue = $model->image;
-            $oldValueUz = $model->video;
             $newValue = UploadedFile::getInstance($model, 'image');
             $newValueUz = UploadedFile::getInstance($model, 'video');
             if ($newValue) {

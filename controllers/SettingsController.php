@@ -95,11 +95,10 @@ class SettingsController extends Controller
     public function actionUpdate($id)
     {
         $model = Settings::findOne($id);
-
+        $oldValue = $model->value;
+        $oldValueUz = $model->value_uz;
         if ($model->load(Yii::$app->request->post()) ?? $model->validate()) {
             if (in_array($model->key, Settings::fileKeys())) {
-                $oldValue = $model->value;
-                $oldValueUz = $model->value_uz;
                 $newValue = UploadedFile::getInstance($model, 'value');
                 $newValueUz = UploadedFile::getInstance($model, 'value_uz');
                 if ($newValue) {

@@ -112,10 +112,9 @@ class SertificatesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $oldValue = $model->image;
+        $oldValueUz = $model->image_uz;
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $oldValue = $model->image;
-            $oldValueUz = $model->image_uz;
             $newValue = UploadedFile::getInstance($model, 'image');
             $newValueUz = UploadedFile::getInstance($model, 'image_uz');
             if ($newValue) {

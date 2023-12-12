@@ -102,9 +102,8 @@ class AboutImagesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $oldValue = $model->image;
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $oldValue = $model->image;
             $newValue = UploadedFile::getInstance($model, 'image');
             if ($newValue) {
                 $uploadPath = 'uploads/';
