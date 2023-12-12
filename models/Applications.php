@@ -40,7 +40,7 @@ class Applications extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'phone', 'description'], 'required'],
+            [['name', 'phone'], 'required'],
             [['description', 'type'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'phone', 'email'], 'string', 'max' => 255],
