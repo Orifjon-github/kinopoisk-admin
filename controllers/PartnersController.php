@@ -72,7 +72,7 @@ class PartnersController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $newValue = UploadedFile::getInstance($model, 'image');
+                $newValue = UploadedFile::getInstance($model, 'icon');
                 $newValueUz = UploadedFile::getInstance($model, 'icon_uz');
                 $uploadPath = 'uploads/';
                 $fileName = uniqid() . '.' . $newValue->extension;
