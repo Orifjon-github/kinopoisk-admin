@@ -49,7 +49,7 @@ class Products extends \yii\db\ActiveRecord
             [['description', 'description_uz', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'name_uz', 'image'], 'string', 'max' => 255],
-            [['totalCount'], 'int'],
+            [['totalCount'], 'integer'],
         ];
     }
 

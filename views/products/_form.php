@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description_uz')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'totalCount')->input('int') ?>
+    <?= $form->field($model, 'totalCount')->textInput(['type' => 'number']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
