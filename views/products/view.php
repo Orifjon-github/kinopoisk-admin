@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'name_uz',
             'image',
+            'totalCount',
             'description:ntext',
             'description_uz:ntext',
             'enable',
