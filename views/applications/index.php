@@ -38,10 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        return json_encode(unserialize($model->description), JSON_PRETTY_PRINT);
                     }
                     return $model->description;
-                },
-                'filter' => Applications::AppTypes()
+                }
             ],
-            'type',
             [
                 'attribute' => 'type',
                 'value' => function (Applications $model) {
