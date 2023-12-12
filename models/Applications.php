@@ -63,4 +63,16 @@ class Applications extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public static function AppTypes($type=null) {
+        $list = [
+            'partner' => 'Для партнера',
+            'consultation' => 'Для консультации',
+            'order' => 'Заказ'
+        ];
+        if ($type==null) {
+            return $list;
+        }
+        return $list[$type];
+    }
 }

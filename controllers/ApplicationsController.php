@@ -47,6 +47,42 @@ class ApplicationsController extends Controller
         ]);
     }
 
+    public function actionOrders()
+    {
+        $searchModel = new ApplicationsSearch();
+        $searchModel->type = 'order';
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('orders', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionPartners()
+    {
+        $searchModel = new ApplicationsSearch();
+        $searchModel->type = 'partner';
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('partners', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionConsultations()
+    {
+        $searchModel = new ApplicationsSearch();
+        $searchModel->type = 'consultation';
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('consultations', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Applications model.
      * @param string $id ID
