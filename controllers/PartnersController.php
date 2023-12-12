@@ -4,9 +4,10 @@ namespace app\controllers;
 
 use app\models\Partners;
 use app\models\PartnersSearch;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PartnersController implements the CRUD actions for Partners model.
@@ -70,8 +71,23 @@ class PartnersController extends Controller
         $model = new Partners();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $newValue = UploadedFile::getInstance($model, 'image');
+                $newValueUz = UploadedFile::getInstance($model, 'icon_uz');
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+                if ($newValue->saveAs($filePath)) {
+                    $model->icon = $filePath;
+                }
+                if ($newValueUz) {
+                    if ($newValueUz->saveAs($filePath)) {
+                        $model->icon_uz = $filePath;
+                    }
+                }
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -93,8 +109,36 @@ class PartnersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $oldValue = $model->icon;
+            $oldValueUz = $model->icon_uz;
+            $newValue = UploadedFile::getInstance($model, 'icon');
+            $newValueUz = UploadedFile::getInstance($model, 'icon_uz');
+            if ($newValue) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValue->saveAs($filePath)) {
+                    $model->icon = $filePath;
+                }
+            } else {
+                $model->icon = $oldValue;
+            }
+            if ($newValueUz) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValueUz->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValueUz->saveAs($filePath)) {
+                    $model->icon_uz = $filePath;
+                }
+            } else {
+                $model->icon_uz = $oldValueUz;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
