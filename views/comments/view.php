@@ -39,14 +39,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'video',
                 'format' => 'raw',
                 'value' => function (Comments $model) {
-                    return Html::a('Просмотр Файл', ['/'.$model->video], ['target' => '_blank']);
+                    if (str_starts_with($model->video, 'uploads/')) {
+                        return Html::a('Просмотр Файл', ['/'.$model->video], ['target' => '_blank']);
+                    } else {
+                        return Html::a('Просмотр Файл', $model->video, ['target' => '_blank']);
+                    }
+
                 }
             ],
             [
                 'attribute' => 'image',
                 'format' => 'raw',
                 'value' => function (Comments $model) {
-                    return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                    if (str_starts_with($model->image, 'uploads/')) {
+                        return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                    } else {
+                        return Html::a('Просмотр Файл', $model->image, ['target' => '_blank']);
+                    }
                 }
             ],
             [
