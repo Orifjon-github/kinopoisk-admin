@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="settings-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <div class="box box-success">
-        <div class="box-body">
+    <div class="card">
+        <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
                     <?= GridView::widget([
