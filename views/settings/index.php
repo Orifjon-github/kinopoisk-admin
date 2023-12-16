@@ -15,12 +15,8 @@ $this->title = 'Settings';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="settings-index">
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <div class="card">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
@@ -30,12 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id',
                             [
                                 'attribute' => 'key',
+                                'format' => 'raw',
                                 'value' => function (Settings $model) {
                                     return $model::settingKeys($model->key) ?? $model->key;
                                 }
                             ],
                             [
                                 'attribute' => 'value',
+                                'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
                                 'format' => 'raw',
                                 'value' => function (Settings $model) {
                                     if (str_starts_with($model->value, 'uploads/')) {
@@ -43,10 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     } else {
                                         return $model->value;
                                     }
-                                }
+                                },
                             ],
                             [
                                 'attribute' => 'value_uz',
+                                'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
                                 'format' => 'raw',
                                 'value' => function (Settings $model) {
                                     if (empty($model->value_uz)) {
@@ -61,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'attribute' => 'enable',
+                                'format' => 'raw',
                                 'value' => function (Settings $model) {
                                     return Socials::enableOrDisable($model->enable);
                                 },
@@ -74,8 +74,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ],
                     ]); ?>
-                </div>
-            </div>
         </div>
     </div>
 </div>
