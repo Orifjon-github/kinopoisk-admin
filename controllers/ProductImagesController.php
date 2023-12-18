@@ -66,7 +66,7 @@ class ProductImagesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new ProductImages();
 
@@ -79,8 +79,9 @@ class ProductImagesController extends Controller
                 if ($newValue->saveAs($filePath)) {
                     $model->image = $filePath;
                 }
+                $model->product_id = $id;
                 if ($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['products/view', 'id' => $model->product_id]);
                 }
             }
         } else {
@@ -117,7 +118,7 @@ class ProductImagesController extends Controller
                 $model->image = $oldValue;
             }
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['products/view', 'id' => $model->product_id]);
             }
         }
 
@@ -135,9 +136,11 @@ class ProductImagesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $productID = $model->product_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['products/view', 'id' => $productID]);
     }
 
     /**

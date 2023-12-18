@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-body">
             <h3>Изображений Продукт</h3>
             <p>
-                <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Добавить новое', ['product-images/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
             </p>
 
             <?= GridView::widget([

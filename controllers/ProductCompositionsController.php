@@ -65,13 +65,14 @@ class ProductCompositionsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new ProductCompositions();
-
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->product_id = $id;
+                $model->save();
+                return $this->redirect(['products/view', 'id' => $id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -94,7 +95,7 @@ class ProductCompositionsController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['products/view', 'id' => $model->product_id]);
         }
 
         return $this->render('update', [
@@ -111,9 +112,11 @@ class ProductCompositionsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $productID = $model->product_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['products/view', 'id' => $productID]);
     }
 
     /**
