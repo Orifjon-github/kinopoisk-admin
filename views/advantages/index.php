@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="advantages-index">
 
     <p>
-        <?= Html::a('Create Advantages', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

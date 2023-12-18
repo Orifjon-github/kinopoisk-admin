@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\ProductImages $model */
 
-$this->title = 'Create Product Images';
+$this->title = 'Добавить новое';
 $this->params['breadcrumbs'][] = ['label' => 'Product Images', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

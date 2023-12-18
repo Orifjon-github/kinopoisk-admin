@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\ProductCompositions $model */
 
-$this->title = 'Create Product Compositions';
+$this->title = 'Добавить новое';
 $this->params['breadcrumbs'][] = ['label' => 'Product Compositions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

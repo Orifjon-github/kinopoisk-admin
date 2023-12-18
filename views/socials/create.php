@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Socials $model */
 
-$this->title = 'Create Socials';
+$this->title = 'Добавить новое';
 $this->params['breadcrumbs'][] = ['label' => 'Socials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
