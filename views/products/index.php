@@ -1,5 +1,6 @@
 <?php
 
+use app\models\ProductCompositions;
 use app\models\Products;
 use app\models\Socials;
 use yii\helpers\Html;
@@ -57,6 +58,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
-
 </div>
+

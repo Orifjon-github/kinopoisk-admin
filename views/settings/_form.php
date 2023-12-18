@@ -18,10 +18,7 @@ use yii\widgets\ActiveForm;
     <?php
     if (in_array($model->key, Settings::fileKeys())) {
         $key = Settings::settingKeys($model->key) ?? $model->key;
-        echo "<h5><strong>$key</strong></h5>";
         echo $form->field($model, 'value')->label(false)->fileInput();
-
-        echo "<h5><strong>$key на узбекском</strong></h5>";
         echo $form->field($model, 'value_uz')->label(false)->fileInput();
     } else {
         echo $form->field($model, 'value')->textarea(['rows' => 3]);

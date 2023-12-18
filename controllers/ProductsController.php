@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\ProductCompositionsSearch;
+use app\models\ProductImagesSearch;
 use app\models\Products;
 use app\models\ProductsSearch;
 use yii\web\Controller;
@@ -56,8 +58,14 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new ProductCompositionsSearch();
+        $searchModelImages = new ProductImagesSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProviderImages = $searchModelImages->search($this->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
+            'dataProviderImages' => $dataProviderImages,
         ]);
     }
 

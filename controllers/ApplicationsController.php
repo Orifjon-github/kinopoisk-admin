@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Applications;
 use app\models\ApplicationsSearch;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -91,8 +92,18 @@ class ApplicationsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $dataProvider = null;
+        if ($model->type == 'order') {
+            $orders = unserialize($model->description);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $orders,
+                'pagination' => false, // You can enable pagination if needed
+            ]);
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'orders' => $dataProvider
         ]);
     }
 
