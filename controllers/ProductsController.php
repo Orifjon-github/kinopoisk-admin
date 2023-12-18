@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Comments;
+use app\models\CommentsSearch;
 use app\models\ProductCompositionsSearch;
 use app\models\ProductImagesSearch;
 use app\models\Products;
@@ -60,12 +62,15 @@ class ProductsController extends Controller
     {
         $searchModel = new ProductCompositionsSearch();
         $searchModelImages = new ProductImagesSearch();
+        $searchModelComments = new CommentsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProviderImages = $searchModelImages->search($this->request->queryParams);
+        $dataProviderComments = $searchModelComments->search($this->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
             'dataProvider' => $dataProvider,
             'dataProviderImages' => $dataProviderImages,
+            'dataProviderComments' => $dataProviderComments,
         ]);
     }
 

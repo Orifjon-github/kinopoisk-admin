@@ -1,8 +1,10 @@
 <?php
 
+use app\models\Comments;
 use app\models\ProductImages;
 use app\models\Products;
 use app\models\Socials;
+use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -40,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'image',
                         'format' => 'raw',
                         'value' => function (Products $model) {
-                            return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
                         }
                     ],
                     'totalCount',
@@ -104,9 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card">
         <div class="card-body">
             <h3>Изображений Продукт</h3>
-            <p>
-                <?= Html::a('Добавить новое', ['product-images/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-            </p>
+            <p><?= Html::a('Добавить новое', ['product-images/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?></p>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProviderImages,
@@ -118,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'image',
                         'format' => 'raw',
                         'value' => function (ProductImages $model) {
-                            return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
                         }
                     ],
                     [
@@ -140,6 +140,72 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                             if ($action === 'delete') {
                                 return Url::to(['product-images/delete', 'id' => $loanModel->id]);
+                            }
+                            return null;
+                        },
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
+</div>
+<div class="comments-index">
+    <div class="card">
+        <div class="card-body">
+            <h3>Комментарии к продукту</h3>
+            <p><?= Html::a('Добавить новое', ['product-images/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?></p>
+
+            <?= GridView::widget([
+                'dataProvider' => $dataProviderComments,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    'id',
+                    'author',
+                    'phone',
+                    'description:ntext',
+                    [
+                        'attribute' => 'video',
+                        'format' => 'raw',
+                        'value' => function (Comments $model) {
+                            if (str_starts_with($model->video, 'uploads/')) {
+                                return Html::a('Просмотр Файл', ['/' . $model->video], ['target' => '_blank']);
+                            } else {
+                                return Html::a('Просмотр Файл', $model->video, ['target' => '_blank']);
+                            }
+
+                        }
+                    ],
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function (Comments $model) {
+                            if (str_starts_with($model->image, 'uploads/')) {
+                                return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                            } else {
+                                return Html::a('Просмотр Файл', $model->image, ['target' => '_blank']);
+                            }
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (Comments $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'header' => Yii::t('app', '#'),
+                        'urlCreator' => function ($action, $loanModel, $key, $index) {
+                            if ($action === 'view') {
+                                return Url::to(['comments/view', 'id' => $loanModel->id]);
+                            }
+                            if ($action === 'update') {
+                                return Url::to(['comments/update', 'id' => $loanModel->id]);
+                            }
+                            if ($action === 'delete') {
+                                return Url::to(['comments/delete', 'id' => $loanModel->id]);
                             }
                             return null;
                         },
