@@ -13,50 +13,47 @@ $this->title = 'Applications';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="applications-index">
+    <div class="card">
+        <div class="card-body">
 
-    <!--    <p>-->
-    <!--        --><?php //= Html::a('Create new', ['create'], ['class' => 'btn btn-success']) ?>
-    <!--    </p>-->
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'phone',
-            'email:email',
-            [
-                'attribute' => 'description',
-                'value' => function (Applications $model) {
-                    if ($model->type == 'order') {
-                        return '';
+                    'id',
+                    'name',
+                    'phone',
+                    'email:email',
+                    [
+                        'attribute' => 'description',
+                        'value' => function (Applications $model) {
+                            if ($model->type == 'order') {
+                                return '';
 //                        return json_encode(unserialize($model->description), JSON_PRETTY_PRINT);
-                    }
-                    return $model->description;
-                }
-            ],
-            [
-                'attribute' => 'type',
-                'value' => function (Applications $model) {
-                    return Applications::AppTypes($model->type);
-                },
-                'filter' => Applications::AppTypes()
-            ],
-            //'created_at',
-            //'updated_at',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Applications $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                }
-            ],
-        ],
-    ]); ?>
+                            }
+                            return $model->description;
+                        }
+                    ],
+                    [
+                        'attribute' => 'type',
+                        'value' => function (Applications $model) {
+                            return Applications::AppTypes($model->type);
+                        },
+                        'filter' => Applications::AppTypes()
+                    ],
+                    //'created_at',
+                    //'updated_at',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, Applications $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
 
-
+        </div>
+    </div>
 </div>

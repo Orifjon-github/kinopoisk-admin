@@ -14,32 +14,27 @@ $this->title = 'Applications for Consultation';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="applications-index">
+    <div class="card">
+        <div class="card-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-<!--    <p>-->
-<!--        --><?php //= Html::a('Create new', ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'phone',
-            'email:email',
-            'description:ntext',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Applications $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+                    'id',
+                    'name',
+                    'phone',
+                    'email:email',
+                    'description:ntext',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, Applications $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

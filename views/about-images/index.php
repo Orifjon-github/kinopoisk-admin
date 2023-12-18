@@ -15,42 +15,41 @@ $this->title = 'About Images';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="about-images-index">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Create About Image', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <p>
-        <?= Html::a('Create About Image', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            [
-                'attribute' => 'image',
-                'format' => 'raw',
-                'value' => function (AboutImages $model) {
-                    return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
-                }
-            ],
-            [
-                'attribute' => 'enable',
-                'value' => function (AboutImages $model) {
-                    return Socials::enableOrDisable($model->enable);
-                },
-                'filter' => Socials::enableDisableTypes()
-            ],
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, AboutImages $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+                    'id',
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function (AboutImages $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (AboutImages $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, AboutImages $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

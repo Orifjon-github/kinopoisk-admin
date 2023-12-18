@@ -15,40 +15,40 @@ $this->title = 'Phones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="phones-index">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
-<!---->
-    <p>
-        <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                    'id',
+                    'place',
+                    'number',
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (Phones $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
+                    //'updated_at',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, Phones $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
 
-            'id',
-            'place',
-            'number',
-            [
-                'attribute' => 'enable',
-                'value' => function (Phones $model) {
-                    return Socials::enableOrDisable($model->enable);
-                },
-                'filter' => Socials::enableDisableTypes()
-            ],
-            //'updated_at',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Phones $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+        </div>
+    </div>
 </div>
