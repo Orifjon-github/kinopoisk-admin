@@ -46,8 +46,20 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     'totalCount',
-                    'description:ntext',
-                    'description_uz:ntext',
+                    [
+                        'attribute' => 'description',
+                        'format' => 'raw',
+                        'value' => function (Products $model) {
+                            return $model->description;
+                        }
+                    ],
+                    [
+                        'attribute' => 'description_uz',
+                        'format' => 'raw',
+                        'value' => function (Products $model) {
+                            return $model->description_uz ?? "";
+                        }
+                    ],
                     [
                         'attribute' => 'enable',
                         'value' => function (Products $model) {

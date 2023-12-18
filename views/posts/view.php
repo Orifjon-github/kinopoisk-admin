@@ -31,8 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'title_uz',
             'image:ntext',
-            'description:ntext',
-            'description_uz:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+                'value' => function (\app\models\Posts $model) {
+                    return $model->description;
+                }
+            ],
+            [
+                'attribute' => 'description_uz',
+                'format' => 'raw',
+                'value' => function (\app\models\Posts $model) {
+                    return $model->description_uz ?? '';
+                }
+            ],
             'short_description:ntext',
             'short_description_uz:ntext',
             'enable',

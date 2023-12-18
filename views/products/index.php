@@ -31,16 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-//            'name_uz',
             [
                 'attribute' => 'image',
                 'format' => 'raw',
                 'value' => function (Products $model) {
-                    return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
+                    return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
                 }
             ],
-            'description:ntext',
-            //'description_uz:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+                'value' => function (Products $model) {
+                    return $model->description;
+                }
+            ],
             [
                 'attribute' => 'enable',
                 'value' => function (Products $model) {
@@ -48,13 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Socials::enableDisableTypes()
             ],
-            //'created_at',
-            //'updated_at',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Products $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a('Просмотр Файл', ['/'.$model->image], ['target' => '_blank']);
                 }
             ],
-            'description:ntext',
+//            'description:ntext',
             //'description_uz:ntext',
             [
                 'attribute' => 'enable',

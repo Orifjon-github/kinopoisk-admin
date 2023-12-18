@@ -69,7 +69,7 @@ class CommentsSearch extends Comments
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'description_uz', $this->description_uz])
             ->andFilterWhere(['like', 'video', $this->video])
-            ->andFilterWhere(['like', 'image', $this->video])
+            ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'enable', $this->enable]);
 
         return $dataProvider;
