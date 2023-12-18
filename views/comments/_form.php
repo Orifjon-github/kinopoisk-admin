@@ -22,9 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description_uz')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'image')->fileInput() ?>
+    <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
-    <?= $form->field($model, 'video')->fileInput() ?>
+    <?= $form->field($model, 'video')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

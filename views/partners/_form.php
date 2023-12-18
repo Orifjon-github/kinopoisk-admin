@@ -20,9 +20,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'link_uz')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'icon')->fileInput() ?>
+    <?= $form->field($model, 'icon')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
-    <?= $form->field($model, 'icon_uz')->fileInput() ?>
+    <?= $form->field($model, 'icon_uz')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
