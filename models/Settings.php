@@ -112,4 +112,13 @@ class Settings extends \yii\db\ActiveRecord
             'result_image'
         ];
     }
+
+    public static function htmlKeys(): array
+    {
+        return [
+            'delivery_text',
+            'terms_partner_1',
+            'terms_partner_2',
+        ];
+    }
 }
