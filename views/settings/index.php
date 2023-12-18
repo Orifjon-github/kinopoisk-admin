@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /** @var app\models\SettingsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Settings';
+$this->title = 'Настройки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="settings-index">

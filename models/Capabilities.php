@@ -39,7 +39,6 @@ class Capabilities extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
             [['image', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'title_uz'], 'string', 'max' => 255],

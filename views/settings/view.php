@@ -7,14 +7,14 @@ use yii\widgets\DetailView;
 /** @var app\models\Settings $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Настройки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="settings-view">
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

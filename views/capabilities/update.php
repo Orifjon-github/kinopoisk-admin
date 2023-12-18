@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Update Capabilities: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Capabilities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="capabilities-update">
 

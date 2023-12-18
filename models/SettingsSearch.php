@@ -46,6 +46,9 @@ class SettingsSearch extends Settings
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 100, // Set the number of rows per page
+            ],
         ]);
 
         $this->load($params);

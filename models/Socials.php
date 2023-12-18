@@ -65,8 +65,8 @@ class Socials extends \yii\db\ActiveRecord
     public static function enableDisableTypes(): array
     {
         return [
-            0 => 'Disable',
-            1 => 'Enable'
+            0 => 'Отключить',
+            1 => 'Включить'
         ];
     }
     public static function enableOrDisable($status): string

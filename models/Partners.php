@@ -43,7 +43,6 @@ class Partners extends \yii\db\ActiveRecord
     {
         return [
             [['link', 'link_uz', 'icon', 'icon_uz', 'enable'], 'string'],
-            [['icon'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'name_uz'], 'string', 'max' => 255],
         ];

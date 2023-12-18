@@ -38,7 +38,6 @@ class Sertificates extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
             [['image', 'image_uz', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];

@@ -66,7 +66,29 @@ class Settings extends \yii\db\ActiveRecord
     {
         $list = [
             'logo' => 'Логотип',
-            'email' => 'Электронная почта'
+            'email' => 'Электронная почта',
+            'address' => 'Адрес',
+            'iframe' => 'Карта',
+            'terms_partner_1' => 'Условия партнерства (1)',
+            'terms_partner_2' => 'Условия партнерства (2)',
+            'background_image_partner' => 'Фоновое изображение для партнера',
+            'about_image' => 'Изображение для «О нас»',
+            'about_description' => 'Описание для О нас',
+            'result_video' => 'Видео для результатов',
+            'delivery_text' => 'Текст для доставки',
+            'consultation_image' => 'Изображение для консультации',
+            'consultation_description' => 'Описание для консультации',
+            'consultation_job' => 'Профессия консультанта',
+            'consultation_name' => 'Имя консультанта',
+            'productBg' => 'Фон для страницы продукта',
+            'contactBg' => 'Фон для страницы контактов',
+            'aboutBg' => 'Фон для страницы «О нас»',
+            'blogBg' => 'Фон для страницы новостей',
+            'cartBg' => 'Фон для страницы корзины',
+            'favoritesBg' => 'Фон для страницы избранного',
+            'partnerBg' => 'Фон для партнерской страницы',
+            'about_video' => 'Видео для О нас',
+            'result_image' => 'Изображение для результатов',
         ];
 
         return $list[$key] ?? null;
