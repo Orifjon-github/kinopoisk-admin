@@ -21,6 +21,10 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'description_uz')->textarea(['rows' => 3]) ?>
 
+            <?= $form->field($model, 'link')->textarea(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'link_uz')->textarea(['maxlength' => true]) ?>
+
             <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
             <?= $form->field($model, 'image_uz')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>

@@ -18,7 +18,7 @@ class AdvertisingsSearch extends Advertisings
     {
         return [
             [['id'], 'integer'],
-            [['title', 'title_uz', 'description', 'description_uz', 'image', 'image_uz', 'enable', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'title_uz', 'description', 'description_uz', 'image', 'image_uz', 'enable', 'created_at', 'updated_at', 'link', 'link_uz'], 'safe'],
         ];
     }
 
@@ -66,6 +66,8 @@ class AdvertisingsSearch extends Advertisings
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'title_uz', $this->title_uz])
             ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'link', $this->link])
+            ->andFilterWhere(['like', 'link_uz', $this->link_uz])
             ->andFilterWhere(['like', 'description_uz', $this->description_uz])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'image_uz', $this->image_uz])

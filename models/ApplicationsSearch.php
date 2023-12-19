@@ -69,6 +69,7 @@ class ApplicationsSearch extends Applications
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'description', $this->description]);
 
+        $query->orderBy(['id' => SORT_DESC]);
         return $dataProvider;
     }
 }
