@@ -17,9 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="advertisings-index">
     <div class="card">
         <div class="card-body">
-            <p>
-                <?= Html::a('Create Реклама', ['create'], ['class' => 'btn btn-success']) ?>
-            </p>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -45,11 +42,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filter' => Socials::enableDisableTypes()
                     ],
                     [
-                        'class' => ActionColumn::className(),
-                        'urlCreator' => function ($action, Advertisings $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'id' => $model->id]);
-                        }
-                    ],
+                        'class' => ActionColumn::class,
+                        'template' => '{view}{update}'
+                    ]
                 ],
             ]); ?>
         </div>
