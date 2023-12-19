@@ -63,9 +63,9 @@ class ProductsController extends Controller
         $searchModel = new ProductCompositionsSearch();
         $searchModelImages = new ProductImagesSearch();
         $searchModelComments = new CommentsSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProviderImages = $searchModelImages->search($this->request->queryParams);
-        $dataProviderComments = $searchModelComments->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($id);
+        $dataProviderImages = $searchModelImages->search($id);
+        $dataProviderComments = $searchModelComments->search($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
             'dataProvider' => $dataProvider,

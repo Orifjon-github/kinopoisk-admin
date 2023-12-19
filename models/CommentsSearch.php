@@ -38,7 +38,7 @@ class CommentsSearch extends Comments
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($id)
     {
         $query = Comments::find();
 
@@ -48,8 +48,6 @@ class CommentsSearch extends Comments
             'query' => $query,
         ]);
 
-        $this->load($params);
-
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -58,20 +56,8 @@ class CommentsSearch extends Comments
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'product_id' => $id,
         ]);
-
-        $query->andFilterWhere(['like', 'author', $this->author])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'description_uz', $this->description_uz])
-            ->andFilterWhere(['like', 'video', $this->video])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'enable', $this->enable]);
-
         return $dataProvider;
     }
 }

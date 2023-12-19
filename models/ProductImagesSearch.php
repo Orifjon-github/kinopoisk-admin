@@ -38,7 +38,7 @@ class ProductImagesSearch extends ProductImages
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($id)
     {
         $query = ProductImages::find();
 
@@ -48,8 +48,6 @@ class ProductImagesSearch extends ProductImages
             'query' => $query,
         ]);
 
-        $this->load($params);
-
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -58,14 +56,8 @@ class ProductImagesSearch extends ProductImages
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'product_id' => $id,
         ]);
-
-        $query->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'enable', $this->enable]);
 
         return $dataProvider;
     }
