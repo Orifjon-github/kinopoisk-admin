@@ -165,7 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card">
         <div class="card-body">
             <h3>Комментарии к продукту</h3>
-            <p><?= Html::a('Добавить новое', ['product-images/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?></p>
+            <p><?= Html::a('Добавить новое', ['comments/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?></p>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProviderComments,

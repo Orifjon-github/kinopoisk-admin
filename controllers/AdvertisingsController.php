@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Advertisings;
 use app\models\AdvertisingsSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -164,6 +166,21 @@ class AdvertisingsController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        if ($model->enable){
+            $model->enable = '0';
+        } else {
+            $model->enable = '1';
+        }
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Успешно сохранено');
+            return $this->redirect('index');
+        }
+        Yii::$app->session->setFlash('error', $model->firstErrors);
+        return $this->redirect('index');
+    }
     /**
      * Finds the Advertisings model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

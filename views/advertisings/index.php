@@ -5,7 +5,6 @@ use app\models\Socials;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var app\models\AdvertisingsSearch $searchModel */
@@ -36,14 +35,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'enable',
+                        'format' => 'raw',
                         'value' => function (Advertisings $model) {
-                            return Socials::enableOrDisable($model->enable);
+                            $icon = $model->enable
+                                ? Html::a('<span class="fas fa-toggle-on fa-2x" style="color: green"></span>', ['enable', 'id' => $model->id])
+                                : Html::a('<span class="fas fa-toggle-off fa-2x" style="color: red"></span>', ['enable', 'id' => $model->id]);
+
+                            return '<div class="text-center">' . $icon . '</div>';
                         },
                         'filter' => Socials::enableDisableTypes()
                     ],
                     [
                         'class' => ActionColumn::class,
-                        'template' => '{view}{update}'
+                        'template' => '{view} {update}',
                     ]
                 ],
             ]); ?>
