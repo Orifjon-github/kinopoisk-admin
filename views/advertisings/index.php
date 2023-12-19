@@ -35,19 +35,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'enable',
-                        'format' => 'raw',
                         'value' => function (Advertisings $model) {
-                            $icon = $model->enable
-                                ? Html::a('<span class="fas fa-toggle-on fa-2x" style="color: green"></span>', ['enable', 'id' => $model->id])
-                                : Html::a('<span class="fas fa-toggle-off fa-2x" style="color: red"></span>', ['enable', 'id' => $model->id]);
-
-                            return '<div class="text-center">' . $icon . '</div>';
+                            return Socials::enableOrDisable($model->enable);
                         },
                         'filter' => Socials::enableDisableTypes()
                     ],
                     [
                         'class' => ActionColumn::class,
-                        'template' => '{view} {update}',
+                        'template' => '{view}{update}{enable}',
+                        'buttons' => [
+                            'enable' => function ($url, Advertisings $model) {
+                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 5px;"></span>', ['enable', 'id' => $model->id]);
+                            }
+                        ],
                     ]
                 ],
             ]); ?>

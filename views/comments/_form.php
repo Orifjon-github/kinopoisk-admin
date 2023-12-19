@@ -17,8 +17,6 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'product_id')->textInput() ?>
-
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
             <?= $form->field($model, 'description_uz')->textarea(['rows' => 6]) ?>
@@ -26,6 +24,8 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
             <?= $form->field($model, 'video')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+
+            <?= $form->field($model, 'enable')->dropDownList(\app\models\Socials::enableDisableTypes(), ['value' => '1']) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
