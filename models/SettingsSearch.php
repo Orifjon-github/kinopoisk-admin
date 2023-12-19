@@ -71,6 +71,7 @@ class SettingsSearch extends Settings
             ->andFilterWhere(['like', 'value_uz', $this->value_uz])
             ->andFilterWhere(['like', 'enable', $this->enable]);
 
+        $query->orderBy(['key' => SORT_ASC]);
         return $dataProvider;
     }
 }
