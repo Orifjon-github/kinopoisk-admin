@@ -9,19 +9,21 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="product-compositions-form">
+    <div class="card">
+        <div class="card-body">
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+            <!--    --><?php //= $form->field($model, 'product_id')->textInput() ?>
 
-<!--    --><?php //= $form->field($model, 'product_id')->textInput() ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

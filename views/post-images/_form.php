@@ -9,17 +9,19 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="post-images-form">
+    <div class="card">
+        <div class="card-body">
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($model, 'post_id')->textInput() ?>
 
-    <?= $form->field($model, 'post_id')->textInput() ?>
+            <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
-    <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

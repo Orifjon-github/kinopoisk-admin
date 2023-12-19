@@ -9,7 +9,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="results-form">
-
+    <div class="card">
+        <div class="card-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'count')->textInput(['maxlength' => true]) ?>
@@ -23,5 +24,6 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+        </div>
+    </div>
 </div>

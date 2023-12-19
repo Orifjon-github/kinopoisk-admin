@@ -13,35 +13,37 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="results-view">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </p>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'count',
-            'name',
-            'name_uz',
-            [
-                'attribute' => 'enable',
-                'value' => function (\app\models\Results $model) {
-                    return Socials::enableOrDisable($model->enable);
-                },
-                'filter' => Socials::enableDisableTypes()
-            ],
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
-
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'count',
+                    'name',
+                    'name_uz',
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (\app\models\Results $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
+                    'created_at',
+                    'updated_at',
+                ],
+            ]) ?>
+        </div>
+    </div>
 </div>

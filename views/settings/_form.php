@@ -13,8 +13,6 @@ use yii\widgets\ActiveForm;
 <div class="settings-form">
     <div class="card">
         <div class="card-body">
-
-
             <?php $form = ActiveForm::begin(); ?>
 
             <?= $form->field($model, 'key')->textInput(['maxLength' => true, 'readonly' => true]) ?>

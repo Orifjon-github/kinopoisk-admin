@@ -9,17 +9,19 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="phones-form">
+    <div class="card">
+        <div class="card-body">
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($model, 'place')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'place')->textInput(['maxlength' => true, 'readonly' => true]) ?>
+            <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
