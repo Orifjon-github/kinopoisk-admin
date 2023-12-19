@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'enable')->dropDownList(\app\models\Socials::enableDisableTypes(), ['value' => '1']) ?>
+
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
             </div>

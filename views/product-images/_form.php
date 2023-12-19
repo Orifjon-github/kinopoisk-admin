@@ -14,6 +14,7 @@ use yii\widgets\ActiveForm;
             <?php $form = ActiveForm::begin(); ?>
 
             <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+            <?= $form->field($model, 'enable')->dropDownList(\app\models\Socials::enableDisableTypes(), ['value' => '1']) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
