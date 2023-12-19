@@ -169,16 +169,12 @@ class AdvertisingsController extends Controller
     public function actionEnable($id): Response
     {
         $model = $this->findModel($id);
-        if ($model->enable){
-            $model->enable = '0';
-        } else {
-            $model->enable = '1';
-        }
+        $model->enable = $model->enable ? '0' : '1';
         if ($model->save()) {
             Yii::$app->session->setFlash('success', 'Успешно сохранено');
             return $this->redirect('index');
         }
-        Yii::$app->session->setFlash('error', $model->firstErrors);
+        Yii::$app->session->setFlash('error', 'Временная ошибка');
         return $this->redirect('index');
     }
     /**

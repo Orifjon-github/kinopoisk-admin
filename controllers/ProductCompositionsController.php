@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\ProductCompositions;
 use app\models\ProductCompositionsSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ProductCompositionsController implements the CRUD actions for ProductCompositions model.
@@ -117,6 +119,18 @@ class ProductCompositionsController extends Controller
         $model->delete();
 
         return $this->redirect(['products/view', 'id' => $productID]);
+    }
+
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        $model->enable = $model->enable ? '0' : '1';
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Успешно сохранено');
+            return $this->redirect(['products/view', 'id' => $model->product_id]);
+        }
+        Yii::$app->session->setFlash('error', 'Временная ошибка');
+        return $this->redirect(['products/view', 'id' => $model->product_id]);
     }
 
     /**

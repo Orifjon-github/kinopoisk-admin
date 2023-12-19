@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Partners;
 use app\models\PartnersSearch;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -157,6 +159,18 @@ class PartnersController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        $model->enable = $model->enable ? '0' : '1';
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Успешно сохранено');
+            return $this->redirect('index');
+        }
+        Yii::$app->session->setFlash('error', 'Временная ошибка');
+        return $this->redirect('index');
     }
 
     /**

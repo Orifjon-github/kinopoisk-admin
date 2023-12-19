@@ -94,20 +94,25 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     [
-                        'class' => 'yii\grid\ActionColumn',
-                        'header' => Yii::t('app', '#'),
-                        'urlCreator' => function ($action, $loanModel, $key, $index) {
-                            if ($action === 'view') {
-                                return Url::to(['product-compositions/view', 'id' => $loanModel->id]);
-                            }
-                            if ($action === 'update') {
-                                return Url::to(['product-compositions/update', 'id' => $loanModel->id]);
-                            }
-                            if ($action === 'delete') {
-                                return Url::to(['product-compositions/delete', 'id' => $loanModel->id]);
-                            }
-                            return null;
-                        },
+                        'class' => ActionColumn::class,
+                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-eye"></span>', ['product-compositions/view', 'id' => $model->id]);
+                            },
+                            'update' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['product-compositions/update', 'id' => $model->id]);
+                            },
+                            'delete' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-trash"></span>', ['product-compositions/delete', 'id' => $model->id], [
+                                    'data-method' => 'post',
+                                    'data-confirm' => 'Are you sure you want to delete this item?',
+                                ]);
+                            },
+                            'enable' => function ($url, $model) {
+                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['product-compositions/enable', 'id' => $model->id]);
+                            },
+                        ],
                     ],
                 ],
             ]); ?>
@@ -141,20 +146,25 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filter' => Socials::enableDisableTypes()
                     ],
                     [
-                        'class' => 'yii\grid\ActionColumn',
-                        'header' => Yii::t('app', '#'),
-                        'urlCreator' => function ($action, $loanModel, $key, $index) {
-                            if ($action === 'view') {
-                                return Url::to(['product-images/view', 'id' => $loanModel->id]);
-                            }
-                            if ($action === 'update') {
-                                return Url::to(['product-images/update', 'id' => $loanModel->id]);
-                            }
-                            if ($action === 'delete') {
-                                return Url::to(['product-images/delete', 'id' => $loanModel->id]);
-                            }
-                            return null;
-                        },
+                        'class' => ActionColumn::class,
+                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-eye"></span>', ['product-images/view', 'id' => $model->id]);
+                            },
+                            'update' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['product-images/update', 'id' => $model->id]);
+                            },
+                            'delete' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-trash"></span>', ['product-images/delete', 'id' => $model->id], [
+                                    'data-method' => 'post',
+                                    'data-confirm' => 'Are you sure you want to delete this item?',
+                                ]);
+                            },
+                            'enable' => function ($url, $model) {
+                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['product-images/enable', 'id' => $model->id]);
+                            },
+                        ],
                     ],
                 ],
             ]); ?>
@@ -207,20 +217,25 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filter' => Socials::enableDisableTypes()
                     ],
                     [
-                        'class' => 'yii\grid\ActionColumn',
-                        'header' => Yii::t('app', '#'),
-                        'urlCreator' => function ($action, $loanModel, $key, $index) {
-                            if ($action === 'view') {
-                                return Url::to(['comments/view', 'id' => $loanModel->id]);
-                            }
-                            if ($action === 'update') {
-                                return Url::to(['comments/update', 'id' => $loanModel->id]);
-                            }
-                            if ($action === 'delete') {
-                                return Url::to(['comments/delete', 'id' => $loanModel->id]);
-                            }
-                            return null;
-                        },
+                        'class' => ActionColumn::class,
+                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-eye"></span>', ['comments/view', 'id' => $model->id]);
+                            },
+                            'update' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['comments/update', 'id' => $model->id]);
+                            },
+                            'delete' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-trash"></span>', ['comments/delete', 'id' => $model->id], [
+                                    'data-method' => 'post',
+                                    'data-confirm' => 'Are you sure you want to delete this item?',
+                                ]);
+                            },
+                            'enable' => function ($url, $model) {
+                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['comments/enable', 'id' => $model->id]);
+                            },
+                        ],
                     ],
                 ],
             ]); ?>

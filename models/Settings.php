@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\Response;
 
 /**
  * This is the model class for table "settings".

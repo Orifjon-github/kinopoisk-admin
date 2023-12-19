@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use app\models\Applications;
 use app\models\ApplicationsSearch;
+use Yii;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ApplicationsController implements the CRUD actions for Applications model.
@@ -161,6 +163,18 @@ class ApplicationsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        $model->enable = $model->enable ? '0' : '1';
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Успешно сохранено');
+            return $this->redirect('index');
+        }
+        Yii::$app->session->setFlash('error', 'Временная ошибка');
+        return $this->redirect('index');
     }
 
     /**
