@@ -11,6 +11,8 @@ use Yii;
  * @property string $name
  * @property string|null $name_uz
  * @property string $image
+ *  * @property string $short_description
+ * @property string|null $short_description_uz
  * @property string $description
  * @property string|null $description_uz
  * @property string $enable
@@ -46,7 +48,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description', 'totalCount'], 'required'],
-            [['description', 'description_uz', 'enable'], 'string'],
+            [['description', 'description_uz', 'enable', 'short_description', 'short_description_uz'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'name_uz', 'image'], 'string', 'max' => 255],
             [['totalCount'], 'integer'],
@@ -64,6 +66,8 @@ class Products extends \yii\db\ActiveRecord
             'name_uz' => 'Name Uz',
             'image' => 'Image',
             'description' => 'Description',
+            'short_description' => 'Short Description',
+            'short_description_uz' => 'Short Description Uz',
             'description_uz' => 'Description Uz',
             'totalCount' => 'Count',
             'enable' => 'Enable',

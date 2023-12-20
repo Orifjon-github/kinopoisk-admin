@@ -45,6 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
                         }
                     ],
+                    'short_description',
+                    'short_description_uz',
                     'totalCount',
                     [
                         'attribute' => 'description',
