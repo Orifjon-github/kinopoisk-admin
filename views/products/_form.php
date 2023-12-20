@@ -16,13 +16,15 @@ use yii\widgets\ActiveForm;
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-                    <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'short_description')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'totalCount')->textInput(['type' => 'number']) ?>
                 </div>
 
                 <div class="col-md-6">
-                    <?= $form->field($model, 'totalCount')->textInput(['type' => 'number']) ?>
+                    <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'short_description_uz')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+
                 </div>
             </div>
             <div class="row">
