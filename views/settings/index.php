@@ -59,6 +59,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ],
                             [
+                                'attribute' => 'value_en',
+                                'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
+                                'format' => 'raw',
+                                'value' => function (Settings $model) {
+                                    if (empty($model->value_en)) {
+                                        return "";
+                                    }
+                                    if (str_starts_with($model->value_en, 'uploads/')) {
+                                        return Html::a('Просмотр Файл', ['/' . $model->value_en], ['target' => '_blank']);
+                                    } else {
+                                        return $model->value_en;
+                                    }
+                                }
+                            ],
+                            [
                                 'attribute' => 'enable',
                                 'format' => 'raw',
                                 'value' => function (Settings $model) {

@@ -56,9 +56,9 @@ class Results extends \yii\db\ActiveRecord
             'count' => 'Count',
             'name' => 'Name',
             'name_uz' => 'Name Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 }

@@ -52,9 +52,9 @@ class Sertificates extends \yii\db\ActiveRecord
             'id' => 'ID',
             'image' => 'Image',
             'image_uz' => 'Image Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 }

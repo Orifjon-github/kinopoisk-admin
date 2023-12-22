@@ -61,9 +61,9 @@ class Partners extends \yii\db\ActiveRecord
             'link_uz' => 'Link Uz',
             'icon' => 'Icon',
             'icon_uz' => 'Icon Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 }

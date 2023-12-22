@@ -12,6 +12,7 @@ use yii\web\Response;
  * @property string $key
  * @property string $value
  * @property string|null $value_uz
+ * @property string|null $value_en
  * @property string $enable
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -41,7 +42,7 @@ class Settings extends \yii\db\ActiveRecord
     {
         return [
             [['key', 'value'], 'required'],
-            [['value', 'value_uz', 'enable'], 'string'],
+            [['value', 'value_uz','value_en', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['key'], 'string', 'max' => 255],
         ];
@@ -54,12 +55,13 @@ class Settings extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'key' => 'Key',
-            'value' => 'Value',
-            'value_uz' => 'Value Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'key' => 'Ключ',
+            'value' => 'Ценить',
+            'value_uz' => 'Ценить по-узбекски',
+            'value_en' => 'Ценить по-английски',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 
@@ -70,10 +72,11 @@ class Settings extends \yii\db\ActiveRecord
             'email' => 'Электронная почта',
             'address' => 'Адрес',
             'iframe' => 'Карта',
-            'terms_partner_1' => 'Условия партнерства (1)',
+            'terms_partner' => 'Условия партнерства',
             'terms_partner_2' => 'Условия партнерства (2)',
             'background_image_partner' => 'Фоновое изображение для партнера',
-            'about_image' => 'Изображение для «О нас» (1)',
+            'about_image' => 'Изображение для «О нас»',
+            'about_short_description' => 'Краткое описание для «О нас»',
             'about_image2' => 'Изображение для «О нас» (2)',
             'about_description' => 'Описание для О нас',
             'result_video' => 'Видео для результатов',
@@ -89,7 +92,10 @@ class Settings extends \yii\db\ActiveRecord
             'cartBg' => 'Фон для страницы корзины',
             'favoritesBg' => 'Фон для страницы избранного',
             'partnerBg' => 'Фон для партнерской страницы',
+            'advantageBg' => 'Фон для страницы «Преимущества»',
+            'galleryBg' => 'Фон для страницы «Галереи»',
             'about_video' => 'Видео для О нас',
+            'about_video_image' => 'Изображение для видео «О нас»',
             'result_image' => 'Изображение для результатов',
         ];
 

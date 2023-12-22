@@ -57,9 +57,9 @@ class Faqs extends \yii\db\ActiveRecord
             'question_uz' => 'Question Uz',
             'answer' => 'Answer',
             'answer_uz' => 'Answer Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 }

@@ -66,9 +66,9 @@ class Advertisings extends \yii\db\ActiveRecord
             'description_uz' => 'Description Uz',
             'image' => 'Image',
             'image_uz' => 'Image Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 }

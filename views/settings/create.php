@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Settings $model */
 
-$this->title = 'Create Настройки';
+$this->title = 'Создать Настройки';
 $this->params['breadcrumbs'][] = ['label' => 'Настройки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -22,6 +22,7 @@ use yii\widgets\ActiveForm;
                 $key = Settings::settingKeys($model->key) ?? $model->key;
                 echo $form->field($model, 'value')->fileInput(['class' => 'form-control', 'id' => 'formFile']);
                 echo $form->field($model, 'value_uz')->fileInput(['class' => 'form-control', 'id' => 'formFile']);
+                echo $form->field($model, 'value_en')->fileInput(['class' => 'form-control', 'id' => 'formFile']);
             } else {
                 if (in_array($model->key, Settings::htmlKeys())) {
                     echo $form->field($model, 'value')->widget(CKEditor::className(), [
@@ -36,9 +37,16 @@ use yii\widgets\ActiveForm;
                             'inline' => false, //по умолчанию false
                         ],
                     ]);
+                    echo $form->field($model, 'value_en')->widget(CKEditor::className(), [
+                        'editorOptions' => [
+                            'preset' => 'basic', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                            'inline' => false, //по умолчанию false
+                        ],
+                    ]);
                 } else {
                     echo $form->field($model, 'value')->textarea(['rows' => 3]);
                     echo $form->field($model, 'value_uz')->textarea(['rows' => 3]);
+                    echo $form->field($model, 'value_en')->textarea(['rows' => 3]);
                 }
             }
             ?>

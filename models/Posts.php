@@ -66,9 +66,9 @@ class Posts extends \yii\db\ActiveRecord
             'description_uz' => 'Description Uz',
             'short_description' => 'Short Description',
             'short_description_uz' => 'Short Description Uz',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 

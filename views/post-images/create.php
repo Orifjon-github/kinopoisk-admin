@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\PostImages $model */
 
-$this->title = 'Create Post Images';
+$this->title = 'Добавить новое';
 $this->params['breadcrumbs'][] = ['label' => 'Post Images', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

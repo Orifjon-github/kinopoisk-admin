@@ -70,9 +70,9 @@ class Products extends \yii\db\ActiveRecord
             'short_description_uz' => 'Short Description Uz',
             'description_uz' => 'Description Uz',
             'totalCount' => 'Count',
-            'enable' => 'Enable',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'enable' => 'Включить/Отключить',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 

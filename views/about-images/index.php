@@ -11,14 +11,14 @@ use yii\grid\GridView;
 /** @var app\models\AboutImagesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'About Images';
+$this->title = 'О нас Изображения';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="about-images-index">
     <div class="card">
         <div class="card-body">
             <p>
-                <?= Html::a('Create About Image', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
             </p>
 
             <?= GridView::widget([

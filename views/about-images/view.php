@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /** @var app\models\AboutImages $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'About Images', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'О нас Изображения', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
