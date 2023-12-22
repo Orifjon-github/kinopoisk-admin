@@ -61,8 +61,8 @@ class Applications extends \yii\db\ActiveRecord
             'address' => 'Address',
             'description' => 'Description',
             'type' => 'Type',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 
