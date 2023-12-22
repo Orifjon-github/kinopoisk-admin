@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /** @var app\models\SocialsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Socials';
+$this->title = 'Социальные сети';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="socials-index">
@@ -31,6 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'name',
                     'link:ntext',
+                    [
+                        'attribute' => 'icon',
+                        'format' => 'raw',
+                        'value' => function (Socials $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->icon], ['target' => '_blank']);
+                        }
+                    ],
                     [
                         'attribute' => 'enable',
                         'value' => function (Socials $model) {

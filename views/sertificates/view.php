@@ -9,11 +9,11 @@ use yii\widgets\DetailView;
 /** @var app\models\Sertificates $model */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sertificates', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Сертификаты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="sertificates-view">
+<div class="certificates-view">
     <div class="card">
         <div class="card-body">
             <p>

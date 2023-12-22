@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var app\models\Homes $model */
 
 $this->title = 'Добавить новое';
-$this->params['breadcrumbs'][] = ['label' => 'Homes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Баннеры', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="homes-create">

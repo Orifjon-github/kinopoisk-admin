@@ -18,7 +18,7 @@ class PartnersSearch extends Partners
     {
         return [
             [['id'], 'integer'],
-            [['name', 'name_uz', 'link', 'link_uz', 'icon', 'icon_uz', 'enable', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'link', 'link_uz', 'icon', 'icon_uz', 'enable', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -64,7 +64,6 @@ class PartnersSearch extends Partners
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'name_uz', $this->name_uz])
             ->andFilterWhere(['like', 'link', $this->link])
             ->andFilterWhere(['like', 'link_uz', $this->link_uz])
             ->andFilterWhere(['like', 'icon', $this->icon])

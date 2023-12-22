@@ -11,10 +11,10 @@ use yii\helpers\Url;
 /** @var app\models\SertificatesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Sertificates';
+$this->title = 'Сертификаты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sertificates-index">
+<div class="certificates-index">
     <div class="card">
         <div class="card-body">
             <p>

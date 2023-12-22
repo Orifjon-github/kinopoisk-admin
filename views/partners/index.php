@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /** @var app\models\PartnersSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Partners';
+$this->title = 'Партнеры';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="partners-index">

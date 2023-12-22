@@ -10,12 +10,10 @@ use yii\grid\GridView;
 /** @var app\models\ProjectsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Projects';
+$this->title = 'Проекты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="projects-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Projects', ['create'], ['class' => 'btn btn-success']) ?>

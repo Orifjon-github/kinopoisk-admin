@@ -11,7 +11,7 @@ use yii\grid\GridView;
 /** @var app\models\HomesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Homes';
+$this->title = 'Баннеры';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="homes-index">

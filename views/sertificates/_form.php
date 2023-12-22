@@ -8,12 +8,12 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="sertificates-form">
+<div class="certificates-form">
     <div class="card">
         <div class="card-body">
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'image')->fileInput() ?><?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+            <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
             <?= $form->field($model, 'image_uz')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 

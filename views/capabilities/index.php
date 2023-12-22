@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /** @var app\models\CapabilitiesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Capabilities';
+$this->title = 'Возможности';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="capabilities-index">

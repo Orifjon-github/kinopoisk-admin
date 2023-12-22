@@ -59,21 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ],
                             [
-                                'attribute' => 'value_en',
-                                'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
-                                'format' => 'raw',
-                                'value' => function (Settings $model) {
-                                    if (empty($model->value_en)) {
-                                        return "";
-                                    }
-                                    if (str_starts_with($model->value_en, 'uploads/')) {
-                                        return Html::a('Просмотр Файл', ['/' . $model->value_en], ['target' => '_blank']);
-                                    } else {
-                                        return $model->value_en;
-                                    }
-                                }
-                            ],
-                            [
                                 'attribute' => 'enable',
                                 'format' => 'raw',
                                 'value' => function (Settings $model) {
@@ -83,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'class' => ActionColumn::class,
-                                'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
+                                'template' => '{view} {update} {enable}', // specify the actions you want to display
                                 'buttons' => [
                                     'view' => function ($url, $model, $key) {
                                         return Html::a('<span class="fas fa-eye"></span>', $url); // FontAwesome view icon
@@ -91,12 +76,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'update' => function ($url, $model, $key) {
                                         return Html::a('<span class="fas fa-pencil-alt"></span>', $url); // FontAwesome update icon
                                     },
-                                    'delete' => function ($url, $model, $key) {
-                                        return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                            'data-method' => 'post',
-                                            'data-confirm' => 'Are you sure you want to delete this item?',
-                                        ]); // FontAwesome delete icon
-                                    },
+//                                    'delete' => function ($url, $model, $key) {
+//                                        return Html::a('<span class="fas fa-trash"></span>', $url, [
+//                                            'data-method' => 'post',
+//                                            'data-confirm' => 'Are you sure you want to delete this item?',
+//                                        ]); // FontAwesome delete icon
+//                                    },
                                     'enable' => function ($url, Settings $model) {
                                         return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['enable', 'id' => $model->id]);
                                     }

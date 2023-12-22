@@ -6,11 +6,11 @@ use yii\helpers\Html;
 /** @var app\models\Sertificates $model */
 
 $this->title = 'Обновить: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sertificates', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Сертификаты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
-<div class="sertificates-update">
+<div class="certificates-update">
 
     <?= $this->render('_form', [
         'model' => $model,

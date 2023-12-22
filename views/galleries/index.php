@@ -10,12 +10,10 @@ use yii\grid\GridView;
 /** @var app\models\GalleriesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Galleries';
+$this->title = 'Галереи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="galleries-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Galleries', ['create'], ['class' => 'btn btn-success']) ?>

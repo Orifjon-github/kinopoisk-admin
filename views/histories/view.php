@@ -7,13 +7,11 @@ use yii\widgets\DetailView;
 /** @var app\models\Histories $model */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Histories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Истории', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="histories-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

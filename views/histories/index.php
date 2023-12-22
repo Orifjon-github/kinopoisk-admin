@@ -10,15 +10,13 @@ use yii\grid\GridView;
 /** @var app\models\HistoriesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Histories';
+$this->title = 'Истории';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="histories-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Histories', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

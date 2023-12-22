@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Partners $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Partners', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Партнеры', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

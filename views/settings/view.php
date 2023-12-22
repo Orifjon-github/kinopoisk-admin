@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Settings;
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -29,10 +31,63 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'key',
-                    'value:ntext',
-                    'value_uz:ntext',
-                    'enable',
+                    [
+                        'attribute' => 'key',
+                        'format' => 'raw',
+                        'value' => function (Settings $model) {
+                            return $model::settingKeys($model->key) ?? $model->key;
+                        }
+                    ],
+                    [
+                        'attribute' => 'value',
+                        'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
+                        'format' => 'raw',
+                        'value' => function (Settings $model) {
+                            if (str_starts_with($model->value, 'uploads/')) {
+                                return Html::a('Просмотр Файл', ['/' . $model->value], ['target' => '_blank']);
+                            } else {
+                                return $model->value;
+                            }
+                        },
+                    ],
+                    [
+                        'attribute' => 'value_uz',
+                        'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
+                        'format' => 'raw',
+                        'value' => function (Settings $model) {
+                            if (empty($model->value_uz)) {
+                                return "";
+                            }
+                            if (str_starts_with($model->value_uz, 'uploads/')) {
+                                return Html::a('Просмотр Файл', ['/' . $model->value_uz], ['target' => '_blank']);
+                            } else {
+                                return $model->value_uz;
+                            }
+                        }
+                    ],
+                    [
+                        'attribute' => 'value_en',
+                        'contentOptions' => ['style' => 'text-overflow: ellipsis; white-space: nowrap; max-width: 25vw; overflow: hidden;'],
+                        'format' => 'raw',
+                        'value' => function (Settings $model) {
+                            if (empty($model->value_en)) {
+                                return "";
+                            }
+                            if (str_starts_with($model->value_en, 'uploads/')) {
+                                return Html::a('Просмотр Файл', ['/' . $model->value_en], ['target' => '_blank']);
+                            } else {
+                                return $model->value_en;
+                            }
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'format' => 'raw',
+                        'value' => function (Settings $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
                     'created_at',
                     'updated_at',
                 ],

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,7 +8,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Socials $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Socials', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Социальные сети', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -31,8 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'name',
                     'link:ntext',
-                    'icon:ntext',
-                    'enable',
+                    [
+                        'attribute' => 'icon',
+                        'format' => 'raw',
+                        'value' => function (Socials $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->icon], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (Socials $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
                     'created_at',
                     'updated_at',
                 ],

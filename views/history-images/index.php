@@ -15,10 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-images-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create History Images', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
