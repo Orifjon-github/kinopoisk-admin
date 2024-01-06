@@ -107,6 +107,7 @@ class Settings extends \yii\db\ActiveRecord
             'logo',
             'background_image_partner',
             'about_image',
+            'about_video_image',
             'about_image2',
             'result_video',
             'consultation_image',
