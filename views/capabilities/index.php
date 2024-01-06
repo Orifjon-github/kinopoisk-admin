@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Capabilities;
+use app\models\Socials;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -30,9 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     'title',
-                    'title_uz',
-                    'image:ntext',
-                    'enable',
+//                    'title_uz',
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function (Capabilities $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                        }
+                    ],
+                    //'image_uz:ntext',
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (Capabilities $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
                     //'created_at',
                     //'updated_at',
                     [

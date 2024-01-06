@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string|null $title
  * @property string|null $title_uz
+ * @property string|null $title_en
  * @property string $image
  * @property string $enable
  * @property string|null $created_at
@@ -41,7 +42,7 @@ class Capabilities extends \yii\db\ActiveRecord
         return [
             [['image', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['title', 'title_uz'], 'string', 'max' => 255],
+            [['title', 'title_uz', 'title_en'], 'string', 'max' => 255],
         ];
     }
 
@@ -54,6 +55,7 @@ class Capabilities extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'title_uz' => 'Title Uz',
+            'title_en' => 'Title En',
             'image' => 'Image',
             'enable' => 'Включить/Отключить',
             'created_at' => 'Создан',

@@ -75,11 +75,13 @@ class CapabilitiesController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $newValue = UploadedFile::getInstance($model, 'image');
-                $uploadPath = 'uploads/';
-                $fileName = uniqid() . '.' . $newValue->extension;
-                $filePath = $uploadPath . $fileName;
-                if ($newValue->saveAs($filePath)) {
-                    $model->image = $filePath;
+                if ($newValue) {
+                    $uploadPath = 'uploads/';
+                    $fileName = uniqid() . '.' . $newValue->extension;
+                    $filePath = $uploadPath . $fileName;
+                    if ($newValue->saveAs($filePath)) {
+                        $model->image = $filePath;
+                    }
                 }
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);

@@ -18,7 +18,7 @@ class CapabilitiesSearch extends Capabilities
     {
         return [
             [['id'], 'integer'],
-            [['title', 'title_uz', 'image', 'enable', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'title_uz', 'title_en', 'image', 'enable', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -65,6 +65,7 @@ class CapabilitiesSearch extends Capabilities
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'title_uz', $this->title_uz])
+            ->andFilterWhere(['like', 'title_en', $this->title_en])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'enable', $this->enable]);
 
