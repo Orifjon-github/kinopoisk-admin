@@ -13,8 +13,6 @@ use yii\widgets\ActiveForm;
         <div class="card-body">
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'place')->textInput(['maxlength' => true, 'readonly' => true]) ?>
-
             <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
 
             <div class="form-group">

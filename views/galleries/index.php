@@ -14,32 +14,33 @@ $this->title = 'Галереи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="galleries-index">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Create Galleries', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <p>
-        <?= Html::a('Create Galleries', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'image:ntext',
-            'enable',
-            'created_at',
-            'updated_at',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Galleries $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+                    'id',
+                    'image:ntext',
+                    'enable',
+                    'created_at',
+                    'updated_at',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, Galleries $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

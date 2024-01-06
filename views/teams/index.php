@@ -14,36 +14,37 @@ $this->title = 'Teams';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="teams-index">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Create Teams', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <p>
-        <?= Html::a('Create Teams', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'job',
-            'job_uz',
-            'job_en',
-            //'image:ntext',
-            //'enable',
-            //'created_at',
-            //'updated_at',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Teams $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+                    'id',
+                    'name',
+                    'job',
+                    'job_uz',
+                    'job_en',
+                    //'image:ntext',
+                    //'enable',
+                    //'created_at',
+                    //'updated_at',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, Teams $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

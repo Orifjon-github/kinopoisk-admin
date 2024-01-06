@@ -9,20 +9,22 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="services-form">
+    <div class="card">
+        <div class="card-body">
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'title_uz')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'title_uz')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'title_en')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'title_en')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
 
-    <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

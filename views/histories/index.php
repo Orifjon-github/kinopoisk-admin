@@ -14,38 +14,40 @@ $this->title = 'Истории';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="histories-index">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <p>
-        <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                    'id',
+                    'years',
+                    'title:ntext',
+                    'title_uz:ntext',
+                    'title_en:ntext',
+                    //'description:ntext',
+                    //'description_uz:ntext',
+                    //'description_en:ntext',
+                    //'enable',
+                    //'created_at',
+                    //'updated_at',
+                    [
+                        'class' => ActionColumn::className(),
+                        'urlCreator' => function ($action, Histories $model, $key, $index, $column) {
+                            return Url::toRoute([$action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]); ?>
 
-            'id',
-            'years',
-            'title:ntext',
-            'title_uz:ntext',
-            'title_en:ntext',
-            //'description:ntext',
-            //'description_uz:ntext',
-            //'description_en:ntext',
-            //'enable',
-            //'created_at',
-            //'updated_at',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Histories $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+        </div>
+    </div>
 </div>

@@ -15,32 +15,34 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="services-view">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </p>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title:ntext',
-            'title_uz:ntext',
-            'title_en:ntext',
-            'image:ntext',
-            'enable',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
-
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'title:ntext',
+                    'title_uz:ntext',
+                    'title_en:ntext',
+                    'image:ntext',
+                    'enable',
+                    'created_at',
+                    'updated_at',
+                ],
+            ]) ?>
+        </div>
+    </div>
 </div>
 
 <div class="service-images-index">
