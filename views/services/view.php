@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Socials;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -38,4 +41,57 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
+
+<div class="service-images-index">
+    <div class="card">
+        <div class="card-body">
+            <h3>Изображений Услуга</h3>
+            <p><?= Html::a('Добавить новое', ['service-images/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?></p>
+
+            <?= GridView::widget([
+                'dataProvider' => $dataProviderImages,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    'id',
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function (\app\models\ServiceImages $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (\app\models\ServiceImages $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
+                    [
+                        'class' => ActionColumn::class,
+                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-eye"></span>', ['service-images/view', 'id' => $model->id]);
+                            },
+                            'update' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['service-images/update', 'id' => $model->id]);
+                            },
+                            'delete' => function ($url, $model, $key) {
+                                return Html::a('<span class="fas fa-trash"></span>', ['service-images/delete', 'id' => $model->id], [
+                                    'data-method' => 'post',
+                                    'data-confirm' => 'Are you sure you want to delete this item?',
+                                ]);
+                            },
+                            'enable' => function ($url, $model) {
+                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['service-images/enable', 'id' => $model->id]);
+                            },
+                        ],
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

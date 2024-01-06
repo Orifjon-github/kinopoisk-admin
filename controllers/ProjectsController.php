@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\HistoryImagesSearch;
+use app\models\ProjectImagesSearch;
 use app\models\Projects;
 use app\models\ProjectsSearch;
 use yii\web\Controller;
@@ -55,8 +57,11 @@ class ProjectsController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelImages = new ProjectImagesSearch();
+        $dataProviderImages = $searchModelImages->search($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderImages' => $dataProviderImages,
         ]);
     }
 

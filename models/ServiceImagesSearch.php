@@ -31,24 +31,13 @@ class ServiceImagesSearch extends ServiceImages
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
+    public function search($id): ActiveDataProvider
     {
         $query = ServiceImages::find();
-
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -58,14 +47,8 @@ class ServiceImagesSearch extends ServiceImages
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'service_id' => $this->service_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'service_id' => $id,
         ]);
-
-        $query->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'enable', $this->enable]);
 
         return $dataProvider;
     }

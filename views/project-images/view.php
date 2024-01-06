@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Socials;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 

@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Histories;
 use app\models\HistoriesSearch;
+use app\models\HistoryImagesSearch;
+use app\models\ProductImagesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,8 +57,11 @@ class HistoriesController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelImages = new HistoryImagesSearch();
+        $dataProviderImages = $searchModelImages->search($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderImages' => $dataProviderImages,
         ]);
     }
 

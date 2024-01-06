@@ -38,17 +38,13 @@ class HistoryImagesSearch extends HistoryImages
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($id)
     {
         $query = HistoryImages::find();
-
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -58,15 +54,10 @@ class HistoryImagesSearch extends HistoryImages
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'history_id' => $this->history_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'history_id' => $id,
         ]);
 
-        $query->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'enable', $this->enable]);
-
         return $dataProvider;
+
     }
 }

@@ -126,7 +126,7 @@ class Settings extends \yii\db\ActiveRecord
     public static function htmlKeys(): array
     {
         return [
-            'delivery_text',
+            'about_description',
             'terms_partner_1',
             'terms_partner_2',
         ];

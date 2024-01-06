@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\HistoryImagesSearch;
+use app\models\ServiceImagesSearch;
 use app\models\Services;
 use app\models\ServicesSearch;
 use yii\web\Controller;
@@ -55,8 +57,11 @@ class ServicesController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelImages = new ServiceImagesSearch();
+        $dataProviderImages = $searchModelImages->search($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderImages' => $dataProviderImages,
         ]);
     }
 

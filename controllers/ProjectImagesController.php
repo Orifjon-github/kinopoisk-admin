@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use app\models\ProjectImages;
 use app\models\ProjectImagesSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * ProjectImagesController implements the CRUD actions for ProjectImages model.
@@ -65,13 +68,23 @@ class ProjectImagesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new ProjectImages();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $newValue = UploadedFile::getInstance($model, 'image');
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+                if ($newValue->saveAs($filePath)) {
+                    $model->image = $filePath;
+                }
+                $model->project_id = $id;
+                if ($model->save()) {
+                    return $this->redirect(['projects/view', 'id' => $model->project_id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -93,8 +106,23 @@ class ProjectImagesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $oldValue = $model->image;
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $newValue = UploadedFile::getInstance($model, 'image');
+            if ($newValue) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValue->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValue->saveAs($filePath)) {
+                    $model->image = $filePath;
+                }
+            } else {
+                $model->image = $oldValue;
+            }
+            if ($model->save()) {
+                return $this->redirect(['projects/view', 'id' => $model->project_id]);
+            }
         }
 
         return $this->render('update', [
@@ -114,6 +142,18 @@ class ProjectImagesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        $model->enable = $model->enable ? '0' : '1';
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Успешно сохранено');
+            return $this->redirect('index');
+        }
+        Yii::$app->session->setFlash('error', 'Временная ошибка');
+        return $this->redirect('index');
     }
 
     /**
