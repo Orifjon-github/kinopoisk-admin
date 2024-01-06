@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title_en')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
     <?= $form->field($model, 'short_description')->textarea(['rows' => 6]) ?>
 
@@ -31,12 +31,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description_uz')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'description_en')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'enable')->dropDownList([ 1 => '1', 0 => '0', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
