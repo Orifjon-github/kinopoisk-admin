@@ -43,7 +43,7 @@ class Homes extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title', 'title_uz', 'description', 'description_uz', 'image', 'image_uz', 'enable'], 'string'],
+            [['title', 'title_uz', 'image', 'image_uz', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -57,8 +57,8 @@ class Homes extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'title_uz' => 'Title Uz',
-            'description' => 'Description',
-            'description_uz' => 'Description Uz',
+//            'description' => 'Description',
+//            'description_uz' => 'Description Uz',
             'image' => 'Image',
             'image_uz' => 'Image Uz',
             'enable' => 'Включить/Отключить',

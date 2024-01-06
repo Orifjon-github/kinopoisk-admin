@@ -17,9 +17,9 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'title_uz')->textarea(['rows' => 2]) ?>
 
-            <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
-
-            <?= $form->field($model, 'description_uz')->textarea(['rows' => 3]) ?>
+<!--            --><?//= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
+<!---->
+<!--            --><?//= $form->field($model, 'description_uz')->textarea(['rows' => 3]) ?>
 
             <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 

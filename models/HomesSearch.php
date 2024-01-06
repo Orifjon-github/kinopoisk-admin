@@ -18,7 +18,7 @@ class HomesSearch extends Homes
     {
         return [
             [['id'], 'integer'],
-            [['title', 'title_uz', 'description', 'description_uz', 'image', 'image_uz', 'enable', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'title_uz', 'image', 'image_uz', 'enable', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -65,8 +65,8 @@ class HomesSearch extends Homes
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'title_uz', $this->title_uz])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'description_uz', $this->description_uz])
+//            ->andFilterWhere(['like', 'description', $this->description])
+//            ->andFilterWhere(['like', 'description_uz', $this->description_uz])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'image_uz', $this->image_uz])
             ->andFilterWhere(['like', 'enable', $this->enable]);
