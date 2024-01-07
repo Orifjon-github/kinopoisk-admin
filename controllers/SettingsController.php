@@ -35,12 +35,7 @@ class SettingsController extends Controller
         );
     }
 
-    /**
-     * Lists all Settings models.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new SettingsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -52,12 +47,9 @@ class SettingsController extends Controller
     }
 
     /**
-     * Displays a single Settings model.
-     * @param string $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -86,22 +78,17 @@ class SettingsController extends Controller
 //        ]);
 //    }
 
-    /**
-     * Updates an existing Settings model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = Settings::findOne($id);
         $oldValue = $model->value;
         $oldValueUz = $model->value_uz;
+        $oldValueEn = $model->value_en;
         if ($model->load(Yii::$app->request->post()) ?? $model->validate()) {
             if (in_array($model->key, Settings::fileKeys())) {
                 $newValue = UploadedFile::getInstance($model, 'value');
                 $newValueUz = UploadedFile::getInstance($model, 'value_uz');
+                $newValueEn = UploadedFile::getInstance($model, 'value_uz');
                 if ($newValue) {
                     $uploadPath = 'uploads/';
                     $fileName = uniqid() . '.' . $newValue->extension;
@@ -124,6 +111,17 @@ class SettingsController extends Controller
                 } else {
                     $model->value_uz = $oldValueUz;
                 }
+                if ($newValueEn) {
+                    $uploadPath = 'uploads/';
+                    $fileName = uniqid() . '.' . $newValueEn->extension;
+                    $filePath = $uploadPath . $fileName;
+
+                    if ($newValueEn->saveAs($filePath)) {
+                        $model->value_en = $filePath;
+                    }
+                } else {
+                    $model->value_en = $oldValueEn;
+                }
 
             }
             if ($model->save()) {
@@ -135,19 +133,20 @@ class SettingsController extends Controller
     }
 
     /**
-     * Deletes an existing Settings model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\db\StaleObjectException
+     * @throws \Throwable
+     * @throws NotFoundHttpException
      */
-    public function actionDelete($id)
+    public function actionDelete($id): Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
+    /**
+     * @throws NotFoundHttpException
+     */
     public function actionEnable($id): Response
     {
         $model = $this->findModel($id);
@@ -161,13 +160,9 @@ class SettingsController extends Controller
     }
 
     /**
-     * Finds the Settings model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Settings the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
-    protected function findModel($id)
+    protected function findModel($id): ?Settings
     {
         if (($model = Settings::findOne(['id' => $id])) !== null) {
             return $model;

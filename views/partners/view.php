@@ -32,9 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'name',
-                    'name_uz',
                     'link:ntext',
                     'link_uz:ntext',
+                    'link_en:ntext',
                     [
                         'attribute' => 'icon',
                         'format' => 'raw',
@@ -47,6 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'value' => function (Partners $model) {
                             return Html::a('Просмотр Файл', ['/' . $model->icon_uz], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'icon_en',
+                        'format' => 'raw',
+                        'value' => function (Partners $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->icon_en], ['target' => '_blank']);
                         }
                     ],
                     [

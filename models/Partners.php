@@ -9,11 +9,12 @@ use Yii;
  *
  * @property int $id
  * @property string|null $name
- * @property string|null $name_uz
  * @property string|null $link
  * @property string|null $link_uz
+ * @property string|null $link_en
  * @property string $icon
  * @property string|null $icon_uz
+ * @property string|null $icon_en
  * @property string $enable
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -42,7 +43,7 @@ class Partners extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['link', 'link_uz', 'icon', 'icon_uz', 'enable'], 'string'],
+            [['link', 'link_uz', 'link_en', 'icon', 'icon_uz', 'icon_en', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -56,11 +57,12 @@ class Partners extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'name_uz' => 'Name Uz',
             'link' => 'Link',
             'link_uz' => 'Link Uz',
+            'link_en' => 'Link En',
             'icon' => 'Icon',
             'icon_uz' => 'Icon Uz',
+            'icon_en' => 'Icon En',
             'enable' => 'Включить/Отключить',
             'created_at' => 'Создан',
             'updated_at' => 'Обновлен',

@@ -15,15 +15,15 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
-
             <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'link_uz')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'link_en')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'icon')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
             <?= $form->field($model, 'icon_uz')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
+            <?= $form->field($model, 'icon_en')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

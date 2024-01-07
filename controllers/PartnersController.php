@@ -19,7 +19,7 @@ class PartnersController extends Controller
     /**
      * @inheritDoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),
@@ -34,12 +34,7 @@ class PartnersController extends Controller
         );
     }
 
-    /**
-     * Lists all Partners models.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new PartnersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -51,23 +46,15 @@ class PartnersController extends Controller
     }
 
     /**
-     * Displays a single Partners model.
-     * @param string $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /**
-     * Creates a new Partners model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Partners();
@@ -76,15 +63,25 @@ class PartnersController extends Controller
             if ($model->load($this->request->post())) {
                 $newValue = UploadedFile::getInstance($model, 'icon');
                 $newValueUz = UploadedFile::getInstance($model, 'icon_uz');
+                $newValueEn = UploadedFile::getInstance($model, 'icon_en');
                 $uploadPath = 'uploads/';
                 $fileName = uniqid() . '.' . $newValue->extension;
+                $fileNameUz = uniqid() . '.' . $newValueUz->extension;
+                $fileNameEn = uniqid() . '.' . $newValueEn->extension;
                 $filePath = $uploadPath . $fileName;
+                $filePathUz = $uploadPath . $fileNameUz;
+                $filePathEn = $uploadPath . $fileNameEn;
                 if ($newValue->saveAs($filePath)) {
                     $model->icon = $filePath;
                 }
                 if ($newValueUz) {
-                    if ($newValueUz->saveAs($filePath)) {
-                        $model->icon_uz = $filePath;
+                    if ($newValueUz->saveAs($filePathUz)) {
+                        $model->icon_uz = $filePathUz;
+                    }
+                }
+                if ($newValueEn) {
+                    if ($newValueUz->saveAs($filePathEn)) {
+                        $model->icon_en = $filePathEn;
                     }
                 }
                 if ($model->save()) {
@@ -101,20 +98,18 @@ class PartnersController extends Controller
     }
 
     /**
-     * Updates an existing Partners model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         $oldValue = $model->icon;
         $oldValueUz = $model->icon_uz;
+        $oldValueEn = $model->icon_en;
         if ($this->request->isPost && $model->load($this->request->post())) {
             $newValue = UploadedFile::getInstance($model, 'icon');
             $newValueUz = UploadedFile::getInstance($model, 'icon_uz');
+            $newValueEn = UploadedFile::getInstance($model, 'icon_en');
             if ($newValue) {
                 $uploadPath = 'uploads/';
                 $fileName = uniqid() . '.' . $newValue->extension;
@@ -137,6 +132,17 @@ class PartnersController extends Controller
             } else {
                 $model->icon_uz = $oldValueUz;
             }
+            if ($newValueEn) {
+                $uploadPath = 'uploads/';
+                $fileName = uniqid() . '.' . $newValueEn->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValueEn->saveAs($filePath)) {
+                    $model->icon_en = $filePath;
+                }
+            } else {
+                $model->icon_en = $oldValueEn;
+            }
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -148,13 +154,11 @@ class PartnersController extends Controller
     }
 
     /**
-     * Deletes an existing Partners model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\db\StaleObjectException
+     * @throws \Throwable
+     * @throws NotFoundHttpException
      */
-    public function actionDelete($id)
+    public function actionDelete($id): Response
     {
         $this->findModel($id)->delete();
 
@@ -174,13 +178,9 @@ class PartnersController extends Controller
     }
 
     /**
-     * Finds the Partners model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Partners the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
-    protected function findModel($id)
+    protected function findModel($id): ?Partners
     {
         if (($model = Partners::findOne(['id' => $id])) !== null) {
             return $model;
