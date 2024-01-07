@@ -79,6 +79,7 @@ class SettingsController extends Controller
 //    }
 
     public function actionUpdate($id)
+
     {
         $model = Settings::findOne($id);
         $oldValue = $model->value;

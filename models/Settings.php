@@ -93,6 +93,7 @@ class Settings extends \yii\db\ActiveRecord
             'favoritesBg' => 'Фон для страницы избранного',
             'partnerBg' => 'Фон для партнерской страницы',
             'advantageBg' => 'Фон для страницы «Преимущества»',
+            'consultationBg' => 'Фон для страницы «Консультации»',
             'galleryBg' => 'Фон для страницы «Галереи»',
             'about_video' => 'Видео для О нас',
             'about_video_image' => 'Изображение для видео «О нас»',
@@ -119,7 +120,9 @@ class Settings extends \yii\db\ActiveRecord
             'favoritesBg',
             'partnerBg',
             'about_video',
-            'result_image'
+            'result_image',
+            'advantageBg',
+            'consultationBg'
         ];
     }
 
