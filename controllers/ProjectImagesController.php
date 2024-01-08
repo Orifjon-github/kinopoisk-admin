@@ -139,9 +139,11 @@ class ProjectImagesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $productID = $model->project_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['projects/view', 'id' => $productID]);
     }
 
     public function actionEnable($id): Response
@@ -150,10 +152,10 @@ class ProjectImagesController extends Controller
         $model->enable = $model->enable ? '0' : '1';
         if ($model->save()) {
             Yii::$app->session->setFlash('success', 'Успешно сохранено');
-            return $this->redirect('index');
+            return $this->redirect(['projects/view', 'id' => $model->project_id]);
         }
         Yii::$app->session->setFlash('error', 'Временная ошибка');
-        return $this->redirect('index');
+        return $this->redirect(['projects/view', 'id' => $model->project_id]);
     }
 
     /**
