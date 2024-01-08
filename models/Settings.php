@@ -122,7 +122,8 @@ class Settings extends \yii\db\ActiveRecord
             'about_video',
             'result_image',
             'advantageBg',
-            'consultationBg'
+            'consultationBg',
+            'galleryBg'
         ];
     }
 
