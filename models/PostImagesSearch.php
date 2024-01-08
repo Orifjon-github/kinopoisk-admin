@@ -38,17 +38,13 @@ class PostImagesSearch extends PostImages
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($id): ActiveDataProvider
     {
         $query = PostImages::find();
-
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -58,14 +54,8 @@ class PostImagesSearch extends PostImages
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'post_id' => $this->post_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'post_id' => $id,
         ]);
-
-        $query->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'enable', $this->enable]);
 
         return $dataProvider;
     }

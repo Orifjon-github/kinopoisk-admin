@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     'title',
-                    'title_uz',
+                    'short_description',
                     [
                         'attribute' => 'image',
                         'format' => 'raw',
@@ -39,8 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
                         }
                     ],
-//            'description:ntext',
-                    //'description_uz:ntext',
                     [
                         'attribute' => 'enable',
                         'value' => function (Posts $model) {
@@ -48,8 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'filter' => Socials::enableDisableTypes()
                     ],
-                    //'created_at',
-                    //'updated_at',
                     [
                         'class' => ActionColumn::class,
                         'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display

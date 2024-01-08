@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Services;
 use app\models\Socials;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
@@ -35,8 +36,41 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title:ntext',
                     'title_uz:ntext',
                     'title_en:ntext',
-                    'image:ntext',
-                    'enable',
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function (Services $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'description',
+                        'format' => 'raw',
+                        'value' => function (Services $model) {
+                            return $model->description;
+                        }
+                    ],
+                    [
+                        'attribute' => 'description_uz',
+                        'format' => 'raw',
+                        'value' => function (Services $model) {
+                            return $model->description_uz;
+                        }
+                    ],
+                    [
+                        'attribute' => 'description_en',
+                        'format' => 'raw',
+                        'value' => function (Services $model) {
+                            return $model->description_en;
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (Services $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
                     'created_at',
                     'updated_at',
                 ],

@@ -68,7 +68,7 @@ class PostImagesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new PostImages();
 
@@ -81,8 +81,9 @@ class PostImagesController extends Controller
                 if ($newValue->saveAs($filePath)) {
                     $model->image = $filePath;
                 }
+                $model->post_id = $id;
                 if ($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['posts/view', 'id' => $model->post_id]);
                 }
             }
         } else {
@@ -119,7 +120,7 @@ class PostImagesController extends Controller
                 $model->image = $oldValue;
             }
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['posts/view', 'id' => $model->post_id]);
             }
         }
 

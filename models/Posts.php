@@ -46,9 +46,9 @@ class Posts extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'description'], 'required'],
-            [['image', 'description', 'description_uz','short_description', 'short_description_uz', 'enable'], 'string'],
+            [['image', 'description', 'description_uz', 'description_en','short_description', 'short_description_uz', 'short_description_en', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['title', 'title_uz'], 'string', 'max' => 255],
+            [['title', 'title_uz', 'title_en'], 'string', 'max' => 255],
         ];
     }
 
@@ -61,11 +61,14 @@ class Posts extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'title_uz' => 'Title Uz',
+            'title_en' => 'Title En',
             'image' => 'Image',
             'description' => 'Description',
             'description_uz' => 'Description Uz',
+            'description_en' => 'Description En',
             'short_description' => 'Short Description',
             'short_description_uz' => 'Short Description Uz',
+            'short_description_en' => 'Short Description En',
             'enable' => 'Включить/Отключить',
             'created_at' => 'Создан',
             'updated_at' => 'Обновлен',

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\PostImagesSearch;
 use app\models\Posts;
 use app\models\PostsSearch;
 use Yii;
@@ -58,8 +59,11 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelImages = new PostImagesSearch();
+        $dataProviderImages = $searchModelImages->search($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderImages' => $dataProviderImages,
         ]);
     }
 
