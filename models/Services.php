@@ -11,6 +11,9 @@ use Yii;
  * @property string $title
  * @property string|null $title_uz
  * @property string|null $title_en
+ * @property string|null $description
+ * @property string|null $description_uz
+ * @property string|null $description_en
  * @property string|null $image
  * @property string $enable
  * @property string|null $created_at
@@ -43,7 +46,7 @@ class Services extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title', 'title_uz', 'title_en', 'image', 'enable'], 'string'],
+            [['title', 'title_uz', 'title_en', 'description', 'description_uz', 'description_en', 'image', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -58,6 +61,9 @@ class Services extends \yii\db\ActiveRecord
             'title' => 'Title',
             'title_uz' => 'Title Uz',
             'title_en' => 'Title En',
+            'description' => 'Description',
+            'description_uz' => 'Description Uz',
+            'description_en' => 'Description En',
             'image' => 'Image',
             'enable' => 'Включить/Отключить',
             'created_at' => 'Создан',

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Services;
+use app\models\Socials;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -30,8 +31,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     'title:ntext',
-                    'image:ntext',
-                    //'enable',
+                    [
+                        'attribute' => 'description',
+                        'format' => 'raw',
+                        'value' => function (Services $model) {
+                            return $model->description;
+                        }
+                    ],
+                    [
+                        'attribute' => 'image',
+                        'format' => 'raw',
+                        'value' => function (Services $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'value' => function (Services $model) {
+                            return Socials::enableOrDisable($model->enable);
+                        },
+                        'filter' => Socials::enableDisableTypes()
+                    ],
                     [
                         'class' => ActionColumn::className(),
                         'urlCreator' => function ($action, Services $model, $key, $index, $column) {

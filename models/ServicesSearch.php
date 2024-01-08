@@ -18,7 +18,7 @@ class ServicesSearch extends Services
     {
         return [
             [['id'], 'integer'],
-            [['title', 'title_uz', 'title_en', 'image', 'enable', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'title_uz', 'title_en','description', 'description_uz', 'description_en', 'image', 'enable', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -65,6 +65,7 @@ class ServicesSearch extends Services
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'title_uz', $this->title_uz])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'title_en', $this->title_en])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'enable', $this->enable]);
