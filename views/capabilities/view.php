@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Socials;
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -33,21 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
                     'title_uz',
                     'title_en',
-                    [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (\app\models\Capabilities $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
-                    //'image_uz:ntext',
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (\app\models\Capabilities $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
+                    HelperService::image(),
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],

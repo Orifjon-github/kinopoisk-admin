@@ -1,5 +1,6 @@
 <?php
 
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -29,9 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'image:ntext',
-                    'image_uz:ntext',
-                    'enable',
+                    HelperService::image(),
+                    HelperService::image('uz'),
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],

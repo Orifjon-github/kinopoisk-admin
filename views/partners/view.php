@@ -1,7 +1,6 @@
 <?php
 
-use app\models\Partners;
-use app\models\Socials;
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -35,34 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'link:ntext',
                     'link_uz:ntext',
                     'link_en:ntext',
-                    [
-                        'attribute' => 'icon',
-                        'format' => 'raw',
-                        'value' => function (Partners $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->icon], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'icon_uz',
-                        'format' => 'raw',
-                        'value' => function (Partners $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->icon_uz], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'icon_en',
-                        'format' => 'raw',
-                        'value' => function (Partners $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->icon_en], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (Partners $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
+                    HelperService::image('ru', 'icon'),
+                    HelperService::image('uz', 'icon'),
+                    HelperService::image('en', 'icon'),
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],

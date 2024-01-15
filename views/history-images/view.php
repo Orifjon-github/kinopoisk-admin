@@ -1,8 +1,6 @@
 <?php
 
-use app\models\Socials;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -32,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'history_id',
-            'image:ntext',
-            'enable',
+            HelperService::image(),
+            HelperService::enable(),
             'created_at',
             'updated_at',
         ],

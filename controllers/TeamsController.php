@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Teams;
 use app\models\TeamsSearch;
+use app\services\HelperService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * TeamsController implements the CRUD actions for Teams model.
@@ -116,13 +118,12 @@ class TeamsController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Teams model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Teams the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        HelperService::changeEnableDisable($model);
+        return $this->redirect('index');
+    }
     protected function findModel($id)
     {
         if (($model = Teams::findOne(['id' => $id])) !== null) {

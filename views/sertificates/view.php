@@ -2,6 +2,7 @@
 
 use app\models\Sertificates;
 use app\models\Socials;
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -31,34 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (Sertificates $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'image_uz',
-                        'format' => 'raw',
-                        'value' => function (Sertificates $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image_uz], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'image_en',
-                        'format' => 'raw',
-                        'value' => function (Sertificates $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image_en], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (Sertificates $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
+                    HelperService::image(),
+                    HelperService::image('uz'),
+                    HelperService::image('en'),
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],

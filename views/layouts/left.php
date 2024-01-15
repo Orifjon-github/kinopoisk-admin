@@ -5,9 +5,8 @@
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <?= \yii\helpers\Html::a('<img class="brand-image elevation-3" src="/logo2.svg" alt="APP"><span class="brand-text font-weight-light">'. Yii::$app->user->identity->username .'</span>', Yii::$app->homeUrl, ['class' => 'brand-link']) ?>
+    <?= \yii\helpers\Html::a('<img class="brand-image" src="/admin.png" alt="APP"><span class="brand-text font-weight-light">'. Yii::$app->user->identity->username .'</span>', Yii::$app->homeUrl, ['class' => 'brand-link']) ?>
     <div class="sidebar">
-
         <nav class="mt-2">
             <?= dmstr\adminlte\widgets\Menu::widget(
                 [

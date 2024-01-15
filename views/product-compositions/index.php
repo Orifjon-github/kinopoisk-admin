@@ -1,6 +1,7 @@
 <?php
 
 use app\models\ProductCompositions;
+use app\services\HelperService;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -20,8 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a('Добавить новое', ['create'], ['class' => 'btn btn-success']) ?>
             </p>
 
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
@@ -32,30 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'product_id',
                     'name',
                     'name_uz',
-                    'enable',
-                    //'created_at',
-                    //'updated_at',
-                    [
-                        'class' => ActionColumn::class,
-                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-eye"></span>', $url); // FontAwesome view icon
-                            },
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-pencil-alt"></span>', $url); // FontAwesome update icon
-                            },
-                            'delete' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-trash"></span>', $url, [
-                                    'data-method' => 'post',
-                                    'data-confirm' => 'Are you sure you want to delete this item?',
-                                ]); // FontAwesome delete icon
-                            },
-                            'enable' => function ($url, ProductCompositions $model) {
-                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['enable', 'id' => $model->id]);
-                            }
-                        ],
-                    ]
+                    HelperService::enable(),
+                    HelperService::action()
                 ],
             ]); ?>
         </div>

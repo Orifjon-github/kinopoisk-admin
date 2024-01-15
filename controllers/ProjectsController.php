@@ -6,9 +6,11 @@ use app\models\HistoryImagesSearch;
 use app\models\ProjectImagesSearch;
 use app\models\Projects;
 use app\models\ProjectsSearch;
+use app\services\HelperService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -146,13 +148,13 @@ class ProjectsController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Projects model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Projects the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        HelperService::changeEnableDisable($model);
+        return $this->redirect('index');
+    }
+
     protected function findModel($id)
     {
         if (($model = Projects::findOne(['id' => $id])) !== null) {

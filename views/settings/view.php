@@ -2,6 +2,7 @@
 
 use app\models\Settings;
 use app\models\Socials;
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -80,14 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                         }
                     ],
-                    [
-                        'attribute' => 'enable',
-                        'format' => 'raw',
-                        'value' => function (Settings $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],

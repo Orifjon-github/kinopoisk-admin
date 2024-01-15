@@ -4,6 +4,7 @@ use app\models\Comments;
 use app\models\ProductImages;
 use app\models\Products;
 use app\models\Socials;
+use app\services\HelperService;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -38,13 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'name',
                     'name_uz',
-                    [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (Products $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
+                    HelperService::image(),
                     'short_description',
                     'short_description_uz',
                     'totalCount',
@@ -62,12 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->description_uz ?? "";
                         }
                     ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (Products $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        }
-                    ],
+
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],
@@ -89,33 +80,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     'name',
-                    [
-                        'attribute' => 'enable',
-                        'value' => function ($model) {
-                            return Socials::enableOrDisable($model->enable);
-                        }
-                    ],
-                    [
-                        'class' => ActionColumn::class,
-                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-eye"></span>', ['product-compositions/view', 'id' => $model->id]);
-                            },
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['product-compositions/update', 'id' => $model->id]);
-                            },
-                            'delete' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-trash"></span>', ['product-compositions/delete', 'id' => $model->id], [
-                                    'data-method' => 'post',
-                                    'data-confirm' => 'Are you sure you want to delete this item?',
-                                ]);
-                            },
-                            'enable' => function ($url, $model) {
-                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['product-compositions/enable', 'id' => $model->id]);
-                            },
-                        ],
-                    ],
+                    HelperService::enable(),
+                    HelperService::actionChild('product-compositions')
                 ],
             ]); ?>
         </div>
@@ -133,41 +99,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (ProductImages $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (ProductImages $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
-                    [
-                        'class' => ActionColumn::class,
-                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-eye"></span>', ['product-images/view', 'id' => $model->id]);
-                            },
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['product-images/update', 'id' => $model->id]);
-                            },
-                            'delete' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-trash"></span>', ['product-images/delete', 'id' => $model->id], [
-                                    'data-method' => 'post',
-                                    'data-confirm' => 'Are you sure you want to delete this item?',
-                                ]);
-                            },
-                            'enable' => function ($url, $model) {
-                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['product-images/enable', 'id' => $model->id]);
-                            },
-                        ],
-                    ],
+                    HelperService::image(),
+                    HelperService::enable(),
+                    HelperService::actionChild('product-images')
                 ],
             ]); ?>
         </div>
@@ -211,34 +145,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                         }
                     ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (Comments $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
-                    [
-                        'class' => ActionColumn::class,
-                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-eye"></span>', ['comments/view', 'id' => $model->id]);
-                            },
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['comments/update', 'id' => $model->id]);
-                            },
-                            'delete' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-trash"></span>', ['comments/delete', 'id' => $model->id], [
-                                    'data-method' => 'post',
-                                    'data-confirm' => 'Are you sure you want to delete this item?',
-                                ]);
-                            },
-                            'enable' => function ($url, $model) {
-                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['comments/enable', 'id' => $model->id]);
-                            },
-                        ],
-                    ],
+                    HelperService::enable(),
+                    HelperService::actionChild('comments')
                 ],
             ]); ?>
         </div>

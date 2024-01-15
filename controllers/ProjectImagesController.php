@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ProjectImages;
 use app\models\ProjectImagesSearch;
+use app\services\HelperService;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -149,13 +150,8 @@ class ProjectImagesController extends Controller
     public function actionEnable($id): Response
     {
         $model = $this->findModel($id);
-        $model->enable = $model->enable ? '0' : '1';
-        if ($model->save()) {
-            Yii::$app->session->setFlash('success', 'Успешно сохранено');
-            return $this->redirect(['projects/view', 'id' => $model->project_id]);
-        }
-        Yii::$app->session->setFlash('error', 'Временная ошибка');
-        return $this->redirect(['projects/view', 'id' => $model->project_id]);
+        HelperService::changeEnableDisable($model);
+        return $this->redirect('index');
     }
 
     /**

@@ -1,10 +1,8 @@
 <?php
 
-use app\models\HistoryImages;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
+use app\services\HelperService;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 /** @var app\models\HistoryImagesSearch $searchModel */
@@ -29,16 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'history_id',
-            'image:ntext',
-            'enable',
-            'created_at',
-            //'updated_at',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, HistoryImages $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+            HelperService::image(),
+            HelperService::enable(),
+            HelperService::action()
         ],
     ]); ?>
 

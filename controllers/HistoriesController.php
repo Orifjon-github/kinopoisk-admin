@@ -6,9 +6,11 @@ use app\models\Histories;
 use app\models\HistoriesSearch;
 use app\models\HistoryImagesSearch;
 use app\models\ProductImagesSearch;
+use app\services\HelperService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * HistoriesController implements the CRUD actions for Histories model.
@@ -121,13 +123,13 @@ class HistoriesController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Histories model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Histories the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionEnable($id): Response
+    {
+        $model = $this->findModel($id);
+        HelperService::changeEnableDisable($model);
+        return $this->redirect('index');
+    }
+
     protected function findModel($id)
     {
         if (($model = Histories::findOne(['id' => $id])) !== null) {

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Socials;
+use app\services\HelperService;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -39,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'description:ntext',
                     'description_uz:ntext',
                     'description_en:ntext',
-                    'enable',
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],
@@ -59,41 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (\app\models\HistoryImages $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (\app\models\HistoryImages $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
-                    [
-                        'class' => ActionColumn::class,
-                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-eye"></span>', ['history-images/view', 'id' => $model->id]);
-                            },
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['history-images/update', 'id' => $model->id]);
-                            },
-                            'delete' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-trash"></span>', ['history-images/delete', 'id' => $model->id], [
-                                    'data-method' => 'post',
-                                    'data-confirm' => 'Are you sure you want to delete this item?',
-                                ]);
-                            },
-                            'enable' => function ($url, $model) {
-                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['history-images/enable', 'id' => $model->id]);
-                            },
-                        ],
-                    ],
+                    HelperService::image(),
+                    HelperService::enable(),
+                    HelperService::actionChild('history-images')
                 ],
             ]); ?>
         </div>

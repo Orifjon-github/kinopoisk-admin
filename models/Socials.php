@@ -61,16 +61,4 @@ class Socials extends \yii\db\ActiveRecord
             'updated_at' => 'Обновлен',
         ];
     }
-
-    public static function enableDisableTypes(): array
-    {
-        return [
-            0 => 'Отключить',
-            1 => 'Включить'
-        ];
-    }
-    public static function enableOrDisable($status): string
-    {
-        return self::enableDisableTypes()[$status];
-    }
 }

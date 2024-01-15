@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Advertisings;
 use app\models\AdvertisingsSearch;
+use app\services\HelperService;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -169,12 +170,7 @@ class AdvertisingsController extends Controller
     public function actionEnable($id): Response
     {
         $model = $this->findModel($id);
-        $model->enable = $model->enable ? '0' : '1';
-        if ($model->save()) {
-            Yii::$app->session->setFlash('success', 'Успешно сохранено');
-            return $this->redirect('index');
-        }
-        Yii::$app->session->setFlash('error', 'Временная ошибка');
+        HelperService::changeEnableDisable($model);
         return $this->redirect('index');
     }
     /**

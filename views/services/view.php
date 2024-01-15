@@ -2,6 +2,7 @@
 
 use app\models\Services;
 use app\models\Socials;
+use app\services\HelperService;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -37,13 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title_uz:ntext',
                     'title_en:ntext',
                     [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (Services $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
-                    [
                         'attribute' => 'description',
                         'format' => 'raw',
                         'value' => function (Services $model) {
@@ -64,13 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->description_en;
                         }
                     ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (Services $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
+                    HelperService::image(),
+                    HelperService::enable(),
                     'created_at',
                     'updated_at',
                 ],
@@ -91,41 +80,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    [
-                        'attribute' => 'image',
-                        'format' => 'raw',
-                        'value' => function (\app\models\ServiceImages $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
-                        }
-                    ],
-                    [
-                        'attribute' => 'enable',
-                        'value' => function (\app\models\ServiceImages $model) {
-                            return Socials::enableOrDisable($model->enable);
-                        },
-                        'filter' => Socials::enableDisableTypes()
-                    ],
-                    [
-                        'class' => ActionColumn::class,
-                        'template' => '{view} {update} {delete} {enable}', // specify the actions you want to display
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-eye"></span>', ['service-images/view', 'id' => $model->id]);
-                            },
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-pencil-alt"></span>', ['service-images/update', 'id' => $model->id]);
-                            },
-                            'delete' => function ($url, $model, $key) {
-                                return Html::a('<span class="fas fa-trash"></span>', ['service-images/delete', 'id' => $model->id], [
-                                    'data-method' => 'post',
-                                    'data-confirm' => 'Are you sure you want to delete this item?',
-                                ]);
-                            },
-                            'enable' => function ($url, $model) {
-                                return Html::a('<span class="fas fa-sync" style="color: green; margin-left: 2px;"></span>', ['service-images/enable', 'id' => $model->id]);
-                            },
-                        ],
-                    ],
+                    HelperService::image(),
+                    HelperService::enable(),
+                    HelperService::actionChild('service_images')
                 ],
             ]); ?>
         </div>
