@@ -41,7 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'image_uz',
                         'format' => 'raw',
                         'value' => function (Sertificates $model) {
-                            return Html::a('Просмотр Файл', ['/' . $model->image], ['target' => '_blank']);
+                            return Html::a('Просмотр Файл', ['/' . $model->image_uz], ['target' => '_blank']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'image_en',
+                        'format' => 'raw',
+                        'value' => function (Sertificates $model) {
+                            return Html::a('Просмотр Файл', ['/' . $model->image_en], ['target' => '_blank']);
                         }
                     ],
                     [

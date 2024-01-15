@@ -76,6 +76,7 @@ class SertificatesController extends Controller
             if ($model->load($this->request->post())) {
                 $newValue = UploadedFile::getInstance($model, 'image');
                 $newValueUz = UploadedFile::getInstance($model, 'image_uz');
+                $newValueEn = UploadedFile::getInstance($model, 'image_en');
                 $uploadPath = 'uploads/';
                 $fileName = uniqid() . '.' . $newValue->extension;
                 $filePath = $uploadPath . $fileName;
@@ -83,12 +84,19 @@ class SertificatesController extends Controller
                     $model->image = $filePath;
                 }
                 if ($newValueUz) {
-                    $uploadPath = 'uploads/';
                     $fileName = uniqid() . '.' . $newValueUz->extension;
                     $filePath = $uploadPath . $fileName;
 
                     if ($newValueUz->saveAs($filePath)) {
                         $model->image_uz = $filePath;
+                    }
+                }
+                if ($newValueEn) {
+                    $fileName = uniqid() . '.' . $newValueEn->extension;
+                    $filePath = $uploadPath . $fileName;
+
+                    if ($newValueEn->saveAs($filePath)) {
+                        $model->image_en = $filePath;
                     }
                 }
                 if ($model->save()) {
@@ -116,11 +124,13 @@ class SertificatesController extends Controller
         $model = $this->findModel($id);
         $oldValue = $model->image;
         $oldValueUz = $model->image_uz;
+        $oldValueEn = $model->image_en;
         if ($this->request->isPost && $model->load($this->request->post())) {
             $newValue = UploadedFile::getInstance($model, 'image');
             $newValueUz = UploadedFile::getInstance($model, 'image_uz');
+            $newValueEn = UploadedFile::getInstance($model, 'image_en');
+            $uploadPath = 'uploads/';
             if ($newValue) {
-                $uploadPath = 'uploads/';
                 $fileName = uniqid() . '.' . $newValue->extension;
                 $filePath = $uploadPath . $fileName;
 
@@ -131,7 +141,6 @@ class SertificatesController extends Controller
                 $model->image = $oldValue;
             }
             if ($newValueUz) {
-                $uploadPath = 'uploads/';
                 $fileName = uniqid() . '.' . $newValueUz->extension;
                 $filePath = $uploadPath . $fileName;
 
@@ -140,6 +149,16 @@ class SertificatesController extends Controller
                 }
             } else {
                 $model->image_uz = $oldValueUz;
+            }
+            if ($newValueEn) {
+                $fileName = uniqid() . '.' . $newValueEn->extension;
+                $filePath = $uploadPath . $fileName;
+
+                if ($newValueUz->saveAs($filePath)) {
+                    $model->image_en = $filePath;
+                }
+            } else {
+                $model->image_en = $oldValueEn;
             }
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

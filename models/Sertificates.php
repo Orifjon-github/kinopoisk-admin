@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $image
  * @property string|null $image_uz
+ * @property string|null $image_en
  * @property string $enable
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -38,7 +39,7 @@ class Sertificates extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image', 'image_uz', 'enable'], 'string'],
+            [['image', 'image_uz','image_en', 'enable'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -52,6 +53,7 @@ class Sertificates extends \yii\db\ActiveRecord
             'id' => 'ID',
             'image' => 'Image',
             'image_uz' => 'Image Uz',
+            'image_en' => 'Image En',
             'enable' => 'Включить/Отключить',
             'created_at' => 'Создан',
             'updated_at' => 'Обновлен',
