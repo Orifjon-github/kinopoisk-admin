@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     HelperService::image(),
                     HelperService::enable(),
-                    HelperService::actionChild('project-images/create'),
+                    HelperService::actionChild('project-images'),
                 ],
             ]); ?>
         </div>
