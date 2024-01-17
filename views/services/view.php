@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     HelperService::image(),
                     HelperService::enable(),
-                    HelperService::actionChild('service_images')
+                    HelperService::actionChild('service-images')
                 ],
             ]); ?>
         </div>
