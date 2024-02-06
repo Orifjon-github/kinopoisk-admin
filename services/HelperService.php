@@ -23,14 +23,13 @@ class HelperService
         ];
     }
 
-    public static function image($lang='ru', $icon="image"): array
+    public static function image($attribute): array
     {
-        $image = ($lang == "ru") ? $icon : "$icon" .'_'. "$lang";
         return [
-            'attribute' => $image,
+            'attribute' => $attribute,
             'format' => 'raw',
-            'value' => function ($model) use ($image) {
-                return Html::a('Просмотр Файл', ['/' . $model->$image], ['target' => '_blank']);
+            'value' => function ($model) use ($attribute) {
+                return Html::a('Просмотр Файл', ['/' . $model->$attribute], ['target' => '_blank']);
             }
         ];
     }
