@@ -59,7 +59,7 @@ class Categories extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -73,53 +73,34 @@ class Categories extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function all() {
+    public static function all(): array
+    {
         $categories = self::find()->select(['id', 'name'])->asArray()->all();
 
         return ArrayHelper::map($categories, 'id', 'name');
     }
 
-    public function getAdditionalFields()
+    public function getAdditionalFields(): \yii\db\ActiveQuery
     {
         return $this->hasMany(AdditionalFields::class, ['category_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Categories]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategories()
+    public function getCategories(): \yii\db\ActiveQuery
     {
         return $this->hasMany(Categories::class, ['parent_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Filters]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFilters()
+    public function getFilters(): \yii\db\ActiveQuery
     {
         return $this->hasMany(Filters::class, ['category_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Parent]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getParent()
+    public function getParent(): \yii\db\ActiveQuery
     {
         return $this->hasOne(Categories::class, ['id' => 'parent_id']);
     }
 
-    /**
-     * Gets query for [[Products]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProducts()
+    public function getProducts(): \yii\db\ActiveQuery
     {
         return $this->hasMany(Products::class, ['category_id' => 'id']);
     }

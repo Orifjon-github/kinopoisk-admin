@@ -5,20 +5,16 @@ namespace app\controllers;
 use app\models\Categories;
 use app\models\CategoriesSearch;
 use app\services\HelperService;
+use Throwable;
+use Yii;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 
-/**
- * CategoriesController implements the CRUD actions for Categories model.
- */
 class CategoriesController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),
@@ -33,12 +29,7 @@ class CategoriesController extends Controller
         );
     }
 
-    /**
-     * Lists all Categories models.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new CategoriesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -49,24 +40,13 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Categories model.
-     * @param string $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
+    public function actionView(string $id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /**
-     * Creates a new Categories model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Categories();
@@ -84,14 +64,7 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Categories model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
+    public function actionUpdate(string $id)
     {
         $model = $this->findModel($id);
 
@@ -105,13 +78,10 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Deletes an existing Categories model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws Throwable
+     * @throws StaleObjectException
      */
-    public function actionDelete($id)
+    public function actionDelete($id): Response
     {
         $this->findModel($id)->delete();
 
@@ -130,7 +100,7 @@ class CategoriesController extends Controller
         if (($model = Categories::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
+        Yii::$app->session->setFlash('error', 'Fast contact with Admin!');
+        return $this->redirect(['index']);
     }
 }
