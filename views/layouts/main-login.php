@@ -19,13 +19,13 @@ dmstr\adminlte\web\AdminLteAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<body class="login-page">
+<body class="login-page" style="background-color: #033c67">
 
     <?php $this->beginBody() ?>
 
     <div class="login-box">
         <div class="login-logo">
-            <img src="/logo.png" alt="milliy" style="max-height: 100px">
+            <img src="/baymarket.png" alt="milliy" style="max-height: 100px">
         </div>
 
         <?= \dmstr\adminlte\widgets\Alert::widget(); ?>

@@ -93,4 +93,14 @@ class HelperService
         Yii::$app->session->setFlash('error', 'Временная ошибка');
         return true;
     }
+
+    public static function findModel($class, $id)
+    {
+        if (($model = $class::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        Yii::$app->session->setFlash('error', 'Fast contact with Developer! (998908319755)');
+        return null;
+    }
 }
