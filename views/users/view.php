@@ -1,5 +1,6 @@
 <?php
 
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -50,13 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h3>Profile</h3>
                         <p>
                             <?= Html::a('Update', ['update', 'id' => $profile['id']], ['class' => 'btn btn-primary']) ?>
-<!--                            --><?php //= Html::a('Delete', ['delete', 'id' => $profile['id']], [
-//                                'class' => 'btn btn-danger',
-//                                'data' => [
-//                                    'confirm' => 'Are you sure you want to delete this item?',
-//                                    'method' => 'post',
-//                                ],
-//                            ]) ?>
                         </p>
 
                         <?= DetailView::widget([
@@ -96,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attributes' => [
                                 'name',
                                 'description:ntext',
-                                'image',
+                                HelperService::image(),
                                 'status',
                                 'address:ntext',
                                 'banner_1:ntext',

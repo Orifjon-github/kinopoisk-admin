@@ -13,21 +13,17 @@ class FileService
         $this->model = $model;
     }
 
-    public function create(): bool
+    public function create($attribute): bool
     {
-        $this->handleFileUpload('image');
-        $this->handleFileUpload('image_uz');
-        $this->handleFileUpload('image_en');
+        $this->handleFileUpload($attribute);
 
         $this->model->save();
         return true;
     }
 
-    public function update($oldImage=null, $oldImageUz=null, $oldImageEn=null): bool
+    public function update($attribute, $oldImage=null, $oldImageUz=null, $oldImageEn=null): bool
     {
-        $this->handleFileUpload('image', $oldImage);
-        $this->handleFileUpload('image_uz', $oldImageUz);
-        $this->handleFileUpload('image_en', $oldImageEn);
+        $this->handleFileUpload($attribute, $oldImage);
 
         $this->model->save();
         return true;

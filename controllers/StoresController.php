@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Stores;
 use app\models\StoresSearch;
+use app\services\FileService;
 use app\services\HelperService;
 use Yii;
 use yii\web\Controller;
@@ -49,13 +50,14 @@ class StoresController extends Controller
     public function actionCreate($id=null)
     {
         $model = new Stores();
-
+        $fileService = new FileService($model);
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 if ($id) {
                     $model->user_id = $id;
                 }
                 $model->save(false);
+                $fileService->create('image');
                 return $this->redirect(['users/view', 'id' => $model->user_id]);
             }
         } else {
@@ -70,7 +72,11 @@ class StoresController extends Controller
     public function actionUpdate($id)
     {
         $model =  HelperService::findModel((new Stores()), $id);
-        if ($model && $this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+        $fileService = new FileService($model);
+        $oldValue = $model->image;
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $fileService->update('image', $oldValue);
             return $this->redirect(['users/view', 'id' => $model->user_id]);
         }
 

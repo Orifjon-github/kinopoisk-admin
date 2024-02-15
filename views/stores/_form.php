@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-            <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'image')->fileInput(['class' => 'form-control', 'id' => 'formFile']) ?>
 
             <?= $form->field($model, 'status')->dropDownList(['pending' => 'Pending', 'active' => 'Active', 'verified' => 'Verified',], ['prompt' => '']) ?>
 

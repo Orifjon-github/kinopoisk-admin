@@ -23,7 +23,7 @@ class HelperService
         ];
     }
 
-    public static function image($attribute): array
+    public static function image($attribute='image'): array
     {
         return [
             'attribute' => $attribute,

@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Categories;
+use app\services\HelperService;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -31,9 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'name',
                     'parent_id',
+                    [
+                        'attribute' => 'parent_id',
+                        'value' => function (Categories $model) {
+                            return $model->parent->name ?? "";
+                        }
+                    ],
                     'order',
-                    'enable',
-                    'photo:ntext',
+                    HelperService::enable(),
+                    HelperService::image('photo'),
                     'created_at',
                     'updated_at',
                 ],

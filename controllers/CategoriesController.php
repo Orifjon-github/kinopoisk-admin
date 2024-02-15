@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Categories;
 use app\models\CategoriesSearch;
+use app\services\FileService;
 use app\services\HelperService;
 use Throwable;
 use Yii;
@@ -51,8 +52,10 @@ class CategoriesController extends Controller
     {
         $model = new Categories();
 
+        $fileService = new FileService($model);
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                $fileService->create('photo');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -68,7 +71,10 @@ class CategoriesController extends Controller
     {
         $model = $this->findModel($id);
 
+        $fileService = new FileService($model);
+        $oldValue = $model->photo;
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $fileService->update('photo', $oldValue);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
