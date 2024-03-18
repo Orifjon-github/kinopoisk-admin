@@ -88,6 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= DetailView::widget([
                             'model' => $store,
                             'attributes' => [
+                                    'id',
                                 'name',
                                 'description:ntext',
                                 HelperService::image(),
